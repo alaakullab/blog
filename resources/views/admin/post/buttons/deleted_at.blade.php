@@ -1,0 +1,1 @@
+@if($deleted_at != NULL){{trans('admin.deleted_at').' = '.$deleted_at}}@else {{trans('admin.deleted_at_true')}} @endif 

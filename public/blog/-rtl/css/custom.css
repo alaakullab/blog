@@ -1,0 +1,150 @@
+.s{
+    font-family: 'Cairo', sans-serif;
+
+}
+html, body, h1, h2, h3, h4, h5, h6, label, div , span , .textrtl  , textarea, p {
+    font-family: 'Cairo', sans-serif;
+    text-align: right;
+}
+body{
+    direction: rtl;
+}
+.owl-carousel{
+    direction: ltr;
+}
+.navbar-nav > li {
+    float: inherit;
+}
+
+.hirecomment{
+    padding-right: 13%;
+}
+.main-post{
+    direction: rtl;
+}
+@media (min-width: 768px){
+    .navbar > .container .navbar-brand, .navbar > .container-fluid .navbar-brand {
+        margin-right: -15px;
+    }
+}
+@media (min-width: 768px){
+    .navbar-nav {
+        float: right;
+    }
+}
+@media (min-width: 768px){
+    .navbar-right {
+        float: left!important;
+        margin-left: -15px;
+    }
+}
+@media (min-width: 768px){
+    .navbar-header {
+        float: right;
+    }
+}
+.custom-navbar .navbar-nav.navbar-nav-first{
+    margin-right: 2em;
+    }
+    .custom-navbar .navbar-nav.navbar-nav-first {
+        margin-left: 1em;
+    }
+@media screen and (max-width: 1170px){
+.custom-navbar .navbar-nav.navbar-nav-first{
+    margin-right: 0em;
+    }
+}
+
+element.style {
+}
+@media (min-width: 768px) {
+    .home-slider .col-md-6 {
+        padding-left: 0;
+    }
+}
+@media (min-width: 992px) {
+        .col-md-6 {
+            width: 50%;
+        }
+    }
+@media (min-width: 992px) {
+            .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9 {
+                float: right;
+            }
+    .singlehireview{
+        float: right;
+    }
+}
+
+@media (min-width: 992px) {
+    .col-lg-10 > main-post {
+        float: left !important;
+    }
+}
+
+.custom-navbar{
+    direction: ltr;
+}
+.post-area .post-info .middle-area {
+    padding-right: 90px;
+    display: inline-block;
+}
+.home-slider .caption {
+     text-align: right;
+}
+
+@media (min-width: 992px){
+    .col-md-offset-1 {
+        margin-right: 8.33333333%;
+    }
+}
+#about figure {
+    margin-right: 15px;
+}
+#about figure span {
+    float: right;
+    margin-right: -15px;
+    padding: 15px 20px;
+    position: relative;
+    top: 20px;
+}
+.team-thumb {
+    background: #ffffff;
+    position: relative;
+    overflow: hidden;
+    text-align: right;
+}
+
+element.style {
+    width: 380px;
+}
+.owl-carousel.owl-drag .owl-item {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.owl-carousel .owl-item {
+    float: right;
+}
+#testimonial .item {
+    background: #ffffff;
+    margin: 20px 0;
+    padding: 3em 4em;
+    text-align: right;
+}
+#contact-form .col-md-12, #contact-form .col-md-4 {
+    padding-right: 0;
+}
+.entry-form form h2 {
+    text-align: center;
+}
+
+.entry-form  div ,.entry-form  h2 , .entry-form h3, .entry-form a {
+    text-align: center;
+}
+
+.section-title .ce {
+    text-align: center;
+}
+
