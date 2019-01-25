@@ -19,7 +19,7 @@
                                  {{trans('admin.home')}}</a></li>
                          <li><a href="<?php if(Request::segment(1) == 'partner'){echo '/partner';}else{ echo url('partner') ;} ?>" class="smoothScroll s">{{trans('admin.partner')}}</a></li>
                          <li><a href="<?php if(Request::segment(1) == 'hire'){echo '/hire#hire';}else{ echo url('hire') ;} ?>" class="smoothScroll s">{{trans('admin.hire')}}</a></li>
-                         <li><a href="#contact" class="smoothScroll s">{{trans('admin.about_us')}}</a></li>
+                         <li><a href="<?php  if(Request::segment(1) == '' ){echo '#contact' ;}else{echo '/#contact';} ?>" class="smoothScroll s">{{trans('admin.about_us')}}</a></li>
                          <li><a href="{{url('bloger')}}" class="smoothScroll s">{{trans('admin.blog')}}</a></li>
                          {{-- <li><a href="#testimonial" class="smoothScroll">{{trans('admin.blog')}}</a></li> --}}
                          <li><a href="{{url('E-commerce')}}" class="smoothScroll s">{{trans('admin.store')}}</a></li>
