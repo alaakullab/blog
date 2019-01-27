@@ -149,15 +149,30 @@
                                 </div>
                             </div>
                             <br>
-                        <div class="form-group">
+
+                            <div class="form-group">
                             {!! Form::label('image_product',trans('admin.image_product'),['class'=>'col-md-3 control-label']) !!}
+
                             <div class="col-md-9">
                                 {!! Form::file('file[]',['multiple'=>'yes','class'=>'form-control','placeholder'=>trans('admin.image_product')]) !!}
                             </div>
                         </div>
-                     
+                        <div class="form-group">
+                        <div class="col-md-9 col-lg-offset-3">
+                            <div class="note note-warning">
 
+                                <div class="row">
 
+                                    <div class="col-md-6">
+
+                                        <p> <strong>{{trans('admin.warning!')}} </strong>{{trans('admin.you_should_upload_image_size:')}}</p> </div>
+                                    <div class="col-md-3">
+                                  254*269px
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
                         <div class="form-actions">
                             <div class="row">
                                 <div class="col-md-12">

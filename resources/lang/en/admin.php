@@ -308,6 +308,8 @@ return [
     "the_rating_has_a_success" => "Success! rating",
     "the_rating_has_not_a_success" => "Sorry! don't rating",
     "Sign_Up" => "Sign Up",
+    "warning!" => "Warning!",
+    "you_should_upload_image_size:" => "You should upload image size:",
     "Sign_Up_sub" => "Sign Up Now",
 
 ];

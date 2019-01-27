@@ -281,6 +281,8 @@ return [
     		"image_slider" => "صورة السلايدر",
     "the_rating_has_a_success" => "  تم التقييم بنجاح",
     "the_rating_has_not_a_success" => "لم يتم التقييم",
+    "warning!" => "تنويه!",
+    "you_should_upload_image_size:" => "يجب ان يكون مقاس الصورة:",
     "Sign_Up" => "التسجيل",
     "Sign_Up_sub" => "سجل الآن",
 
