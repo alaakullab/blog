@@ -125,36 +125,38 @@
                     <!-- /.row -->
 
                     @if(Auth::check())
-                        @if(isset($Informations_users_de))
-                            <div class="row">
-                                <div class="col-sm-6" @if(app('l') == 'ar') style="float: right;" @endif>
-                                    <div class="form-group">
-                                        <label for="company">{{ trans('admin.Gender') }}</label>
-                                        <select class="form-control" id="state" name="Gender">
-                                            <option
-                                                    value="Male" {{$Informations_users_de->Gender  =='Male' ? 'selected' :''}}>{{ trans('admin.Male') }}</option>
-                                            <option
-                                                    value="female" {{$Informations_users_de->Gender =='female' ? 'selected' :''}}>{{ trans('admin.female') }}</option>
-                                        </select>
+                        <div class="row ">
+                            <div class="col-sm-6" @if(app('l') == 'ar') style="float: right;" @endif>
+                                <div class="form-group">
+                                    <label for="company">{{ trans('admin.Gender') }}</label>
+                                    <select class="form-control" id="state" name="Gender">
+                                        <option
+                                                value="Male" @if (isset($Informations_users_de))
+                                            {{$Informations_users_de->Gender  =='Male' ? 'selected' :''}}
+                                                @endif >{{ trans('admin.Male') }}</option>
+                                        <option
+                                                value="female"  @if (isset($Informations_users_de))
+                                            {{$Informations_users_de->Gender =='female' ? 'selected' :''}}
+                                                @endif >{{ trans('admin.female') }}</option>
+                                    </select>
 
-                                    </div>
                                 </div>
-                                <div class="col-sm-6" @if(app('l') == 'ar') style="float: right;" @endif>
-                                    <div class="form-group {{$errors->get('Phone') ? 'has-error' : '' }}">
-                                        <label for="company">{{ trans('admin.Phone') }}</label>
-                                        <input class="form-control" name="Phone"
-                                               value="{{$Informations_users_de->Phone}}"
-                                               id="firstname" type="text">
-                                        @if($errors->get('Phone') )
-                                            <span class="help-block">
-{{ $errors->first('Phone') }} </span>
-                                        @endif
-
-                                    </div>
-                                </div>
-
                             </div>
-                    @endif
+                            <div class="col-sm-6" @if(app('l') == 'ar') style="float: right;" @endif>
+                                <div class="form-group {{$errors->get('Phone') ? 'has-error' : '' }}">
+                                    <label for="company">{{ trans('admin.Phone') }}</label>
+                                    <input class="form-control" name="Phone" value="@if (isset($Informations_users_de)) {{$Informations_users_de->Phone}}@endif"
+
+                                           type="text">
+                                    @if($errors->get('Phone') )
+                                        <span class="help-block">
+{{ $errors->first('Phone') }} </span>
+                                    @endif
+
+                                </div>
+                            </div>
+
+                        </div>
                 @endif
                 <!-- /.row -->
 

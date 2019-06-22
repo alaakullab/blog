@@ -24,7 +24,7 @@ class CommentController extends Controller
     }
 
 
-    public function store()
+    public function store() // اضافة تعليق جديد
     {
         $rules = [
             'content' => 'required',

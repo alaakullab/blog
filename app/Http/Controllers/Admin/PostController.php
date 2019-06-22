@@ -47,9 +47,9 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request $r
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store()  // اضافة مقال جديد
     {
-        if(app('l') == 'en')
+        if(app('l') == 'en')  // لو لغة الموقع الانجليزية
         {
         $rules = [
             'title_' . app('l') => 'required',
