@@ -93,14 +93,14 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="lastname">{{ trans('admin.Lastname') }}</label>
-                                    <input class="form-control" value="{{Auth::user()->Last_Name}}" name="Last_name"
+                                    <input class="form-control" value="{{$user->Last_Name}}" name="Last_name"
                                            id="lastname" type="text">
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="firstname">{{ trans('admin.Firstname') }}</label>
-                                    <input class="form-control" value="{{Auth::user()->First_Name}}" name="First_name"
+                                    <input class="form-control" value="{{$user->First_Name}}" name="First_name"
                                            id="firstname" type="text">
                                 </div>
                             </div>
@@ -109,14 +109,14 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="firstname">{{ trans('admin.Firstname') }}</label>
-                                    <input class="form-control" value="{{ Auth::user()->First_Name}}" name="First_name"
+                                    <input class="form-control" value="{{ $user->First_Name}}" name="First_name"
                                            id="firstname" type="text">
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="lastname">{{ trans('admin.Lastname') }}</label>
-                                    <input class="form-control" value="{{Auth::user()->Last_Name}}" name="Last_name"
+                                    <input class="form-control" value="{{$user->Last_Name}}" name="Last_name"
                                            id="lastname" type="text">
                                 </div>
                             </div>
@@ -125,16 +125,16 @@
                     <!-- /.row -->
 
                     @if(Auth::check())
-                        @if(Auth::user()->Informations_users_de)
+                        @if(isset($Informations_users_de))
                             <div class="row">
                                 <div class="col-sm-6" @if(app('l') == 'ar') style="float: right;" @endif>
                                     <div class="form-group">
                                         <label for="company">{{ trans('admin.Gender') }}</label>
                                         <select class="form-control" id="state" name="Gender">
                                             <option
-                                                    value="Male" {{Auth::user()->Informations_users_de->Gender  =='Male' ? 'selected' :''}}>{{ trans('admin.Male') }}</option>
+                                                    value="Male" {{$Informations_users_de->Gender  =='Male' ? 'selected' :''}}>{{ trans('admin.Male') }}</option>
                                             <option
-                                                    value="female" {{Auth::user()->Informations_users_de->Gender =='female' ? 'selected' :''}}>{{ trans('admin.female') }}</option>
+                                                    value="female" {{$Informations_users_de->Gender =='female' ? 'selected' :''}}>{{ trans('admin.female') }}</option>
                                         </select>
 
                                     </div>
@@ -143,7 +143,7 @@
                                     <div class="form-group {{$errors->get('Phone') ? 'has-error' : '' }}">
                                         <label for="company">{{ trans('admin.Phone') }}</label>
                                         <input class="form-control" name="Phone"
-                                               value="{{Auth::user()->Informations_users_de->Phone}}"
+                                               value="{{$Informations_users_de->Phone}}"
                                                id="firstname" type="text">
                                         @if($errors->get('Phone') )
                                             <span class="help-block">

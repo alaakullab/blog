@@ -139,7 +139,9 @@ class AccountController extends Controller
 
     public function Account_information()
     {
-        return view('shop.pages.account-information', ['title' => trans('admin.Account_information')]);
+        $user = User::find(\Auth::user()->id);
+        $Informations_users_de = Informations_users::where('user_id', \Auth::user()->id)->first();
+        return view('shop.pages.account-information', ['title' => trans('admin.Account_information'),'user' => $user, 'Informations_users_de' => $Informations_users_de]);
     }
 
     public function Account_information_post()
@@ -148,27 +150,29 @@ class AccountController extends Controller
 
             'First_name' => 'required',
             'Last_name' => 'required',
-            'Gender' => 'required',
-            'Phone' => 'required',
+//            'Gender' => '',
+//            'Phone' => '',
 
         ];
+
         $data = $this->validate(request(), $rules, [], [
             'Last_name' => trans('admin.Lastname'),
             'First_name' => trans('admin.Firstname'),
-            'Gender' => trans('admin.Gender'),
-            'Phone' => trans('admin.Phone'),
-
+//            'Gender' => trans('admin.Gender'),
+//            'Phone' => trans('admin.Phone')
         ]);
         $user = User::where('id', \Auth::user()->id);
         $user->First_name =request('First_name');
         $user->Last_name =request('Last_name');
-        if( Informations_users::where('user_id', \Auth::user()->id)){
-          $de = Informations_users::where('user_id', \Auth::user()->id);
-          $de->Gender = request('Gender');
-          $de->Phone = request('Phone');
-          $de->save();
-        }
-        session()->flash('success', trans('admin.added'));
+        User::where('id', \Auth::user()->id)->update($data);
+//        if (Informations_users::where('user_id', \Auth::user()->id)) {
+//            $de = Informations_users::where('user_id', \Auth::user()->id);
+//            $de->Gender = request('Gender');
+//            $de->Phone = request('Phone');
+//            $de->save();
+////            Informations_users::where('id', \Auth::user()->id)->update($de);
+//        }
+        session()->flash('success', trans('admin.updated'));
 
         return back();
     }
