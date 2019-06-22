@@ -242,7 +242,7 @@ class ProductController extends Controller
                   @Storage::has($file->full_path) ? Storage::delete($file->full_path) : '';
               }
           }
-            @$Product->delete();
+            @$product->delete();
             session()->flash('success', trans('admin.deleted'));
             return back();
         }

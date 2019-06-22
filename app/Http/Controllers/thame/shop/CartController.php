@@ -128,7 +128,7 @@ class CartController extends Controller
     public function payment_show()
     {
         //   $key = env('STRIPE_KEY','pk_test_oKwtlDplNFGm3to5KKMizvSH');
-             $key = 'pk_test_oKwtlDplNFGm3to5KKMizvSH';
+             $key = 'pk_test_vTp0AXwixTZmU9kimxAUZ1Gj';
         return view('shop.pages.payment',['key'=>$key,'title'=>awTtrans('Payment Gateway','ar')]);
 
     }
@@ -137,7 +137,7 @@ class CartController extends Controller
     {
 // Set your secret key: remember to change this to your live secret key in production
         // See your keys here: https://dashboard.stripe.com/account/apikeys
-        $key = 'sk_test_2gHLpV0yIoKftvL2MEa65ZkU';
+        $key = 'sk_test_scJee8A9DHP0E8R5EBUqdNis';
         \Stripe\Stripe::setApiKey($key);
         $c = Cart::total();
         $cartt = str_replace('.', '', $c);

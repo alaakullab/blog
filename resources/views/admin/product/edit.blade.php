@@ -52,7 +52,7 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <button class="close" data-dismiss="modal">x</button>
-                                        <h4 class="modal-title">{{trans('{lang}.delete')}}؟</h4>
+                                            <h4 class="modal-title">{{trans('{lang}.delete')}}؟</h4>
                                     </div>
                                     <div class="modal-body">
                                         <i class="fa fa-exclamation-triangle"></i>   {{trans('{lang}.ask_del')}} {{trans('{lang}.id')}} ({{$product->id}}) ؟

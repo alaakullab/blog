@@ -1,5 +1,5 @@
 <?php
-
+// طرق الدفع (بايبال + strip)
 namespace App\Http\Controllers\thame\shop;
 
 use App\Http\Controllers\Controller;

@@ -7,21 +7,26 @@ use App\Http\Controllers\Controller;
 use App\User;
 use App\Informations_users;
 use App\Experience;
+use Illuminate\Http\Request;
 
 class AccountController extends Controller
 {
 
     public function index()
     {
-      
-       
+
+
         return view('blog.pages.my-account.account', ['title' => trans('admin.account')]);
     }
-    public function social_media(){
-        $user = Informations_users::where('user_id',\Auth::user()->id)->first();
-        return view('blog.pages.my-account.social-media', ['title' => awTtrans('social media','en'),'user'=>$user]);
+
+    public function social_media()
+    {
+        $user = Informations_users::where('user_id', \Auth::user()->id)->first();
+        return view('blog.pages.my-account.social-media', ['title' => awTtrans('social media', 'en'), 'user' => $user]);
     }
-    public function social_media_post(){
+
+    public function social_media_post()
+    {
         $rules = [
 
             'linkedin' => ' ',
@@ -29,7 +34,7 @@ class AccountController extends Controller
             'facebook' => ' ',
             'twitter' => ' ',
             'pinterest' => ' ',
-  
+
         ];
         $data = $this->validate(request(), $rules, [], [
             'linkedin' => trans('admin.linkedin'),
@@ -37,13 +42,14 @@ class AccountController extends Controller
             'facebook' => trans('admin.facebook'),
             'twitter' => trans('admin.twitter'),
             'pinterest' => trans('admin.pinterest'),
-  
-  
+
+
         ]);
-        Informations_users::where('user_id',\Auth::user()->id)->update($data);
+        Informations_users::where('user_id', \Auth::user()->id)->update($data);
         session()->flash('success', trans('admin.updated'));
         return back();
     }
+
     public function Change_password()
     {
         $hash = \Hash::check(request('Oldpassword'), \Auth::user()->password);
@@ -109,40 +115,47 @@ class AccountController extends Controller
         // \Hash::check(request('Oldpassword'), Auth::user()->password),
 
     }
-    public function exp(){
-      $exp =Experience::where('user_id',\Auth::user()->id)->get();
-      return view('blog.pages.my-account.experiences', ['exp'=>$exp,'title' => trans('admin.exp')]);
+
+    public function exp()
+    {
+        $exp = Experience::where('user_id', \Auth::user()->id)->get();
+        return view('blog.pages.my-account.experiences', ['exp' => $exp, 'title' => trans('admin.exp')]);
 
     }
+
     public function exp_id($id)
     {
-      @Experience::where('id',$id)->delete();
-      session()->flash('success', trans('admin.deleted'));
-      return back();
+        @Experience::where('id', $id)->delete();
+        session()->flash('success', trans('admin.deleted'));
+        return back();
 
     }
-    public function exp_post(){
-      $rules = [
 
-          'exp' => 'required',
+    public function exp_post()
+    {
+        $rules = [
 
-      ];
-      $data = $this->validate(request(), $rules, [], [
-          'exp' => trans('admin.exp'),
+            'exp' => 'required',
+
+        ];
+        $data = $this->validate(request(), $rules, [], [
+            'exp' => trans('admin.exp'),
 
 
-      ]);
-      $data['user_id'] = \Auth::user()->id;
-      Experience::create($data);
-      session()->flash('success', trans('admin.added'));
+        ]);
+        $data['user_id'] = \Auth::user()->id;
+        Experience::create($data);
+        session()->flash('success', trans('admin.added'));
 
-      return back();
+        return back();
 
     }
 
     public function Account_information()
     {
-        return view('blog.pages.my-account.account-information', ['title' => trans('admin.Account_information')]);
+        $user = User::find(\Auth::user()->id);
+        $Informations_users_de = Informations_users::where('user_id', \Auth::user()->id)->first();
+        return view('blog.pages.my-account.account-information', ['title' => trans('admin.Account_information'), 'user' => $user, 'Informations_users_de' => $Informations_users_de]);
     }
 
     public function Account_information_post()
@@ -151,27 +164,30 @@ class AccountController extends Controller
 
             'First_name' => 'required',
             'Last_name' => 'required',
-            'Gender' => 'required',
-            'Phone' => 'required',
+//            'Gender' => '',
+//            'Phone' => '',
 
         ];
+
         $data = $this->validate(request(), $rules, [], [
             'Last_name' => trans('admin.Lastname'),
             'First_name' => trans('admin.Firstname'),
-            'Gender' => trans('admin.Gender'),
-            'Phone' => trans('admin.Phone'),
-
+//            'Gender' => trans('admin.Gender'),
+//            'Phone' => trans('admin.Phone')
         ]);
+
         $user = User::where('id', \Auth::user()->id);
-        $user->First_name =request('First_name');
-        $user->Last_name =request('Last_name');
-        if( Informations_users::where('user_id', \Auth::user()->id)){
-          $de = Informations_users::where('user_id', \Auth::user()->id);
-          $de->Gender = request('Gender');
-          $de->Phone = request('Phone');
-          $de->save();
-        }
-        session()->flash('success', trans('admin.added'));
+        $user->First_name = request('First_name');
+        $user->Last_name = request('Last_name');
+        User::where('id', \Auth::user()->id)->update($data);
+//        if (Informations_users::where('user_id', \Auth::user()->id)) {
+//            $de = Informations_users::where('user_id', \Auth::user()->id);
+//            $de->Gender = request('Gender');
+//            $de->Phone = request('Phone');
+//            $de->save();
+////            Informations_users::where('id', \Auth::user()->id)->update($de);
+//        }
+        session()->flash('success', trans('admin.updated'));
 
         return back();
     }
@@ -199,7 +215,7 @@ class AccountController extends Controller
         }
         // return dd($data['user_image']);
         User::where('id', \Auth::user()->id)->update($data);
-        session()->flash('success', trans('admin.added'));
+        session()->flash('success', trans('admin.updated'));
 
         return back();
     }
