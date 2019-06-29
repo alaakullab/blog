@@ -134,7 +134,7 @@ for ($x = 0; $x < $p; $x++) {
                                                 <a href="{{ url('/E-commerce/wishlist/'.$product->id) }}" class="btn btn-default"><i
                                                             class="fa fa-heart"></i></a>
                                             @else
-                                                <a href="{{ url('/E-commerce/wishlist/'.$product->id) }}" data-toggle="modal" data-target="#login-modal"  class="btn btn-default"><i
+                                                <a href="#" data-toggle="modal" data-target="#login-modal"  class="btn btn-default"><i
                                                             class="fa fa-heart"></i></a>
                                             @endif
 

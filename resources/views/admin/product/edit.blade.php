@@ -91,7 +91,7 @@
                         <div class="form-group">
                             {!! Form::label('description_ar',trans('admin.description_ar'),['class'=>'col-md-3 control-label']) !!}
                             <div class="col-md-9">
-                                {!! Form::textarea('description_ar',$product->description_ar,['class'=>'form-control','placeholder'=>trans('admin.description_ar')]) !!}
+                                {!! Form::textarea('description_ar',$product->description_ar,['class'=>'form-control ckeditor','placeholder'=>trans('admin.description_ar')]) !!}
                             </div>
                         </div>
                         <br>
@@ -105,14 +105,14 @@
                         <div class="form-group">
                             {!! Form::label('description_en',trans('admin.description_en'),['class'=>'col-md-3 control-label']) !!}
                             <div class="col-md-9">
-                                {!! Form::textarea('description_en',$product->description_en,['class'=>'form-control','placeholder'=>trans('admin.description_en')]) !!}
+                                {!! Form::textarea('description_en',$product->description_en,['class'=>'form-control ckeditor','placeholder'=>trans('admin.description_en')]) !!}
                             </div>
                         </div>
                         <br>
                         <div class="form-group">
                             {!! Form::label('department_id',trans('admin.department_id'),['class'=>'col-md-3 control-label']) !!}
                             <div class="col-md-9">
-                                <input type="hidden" name="department_id" class="department_id" value="{{$product->department_id}}">
+                                <input type="hidden" name="department_id" class="department_id" >
                                 <div id="jstree"></div>
                             </div>
 

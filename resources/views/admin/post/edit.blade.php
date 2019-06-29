@@ -123,9 +123,9 @@
                                 @if($post->image_post != null)
                                     <br>
                                     <img src="{{ Storage::url( $post->image_post ) }}" width="50px"><a
-                                        href="{{aurl('post/image_post')}}"
-                                        class="btn btn-default btn-outlines btn-circle"><i
-                                            class="fa fa-trash"></i>{{trans('admin.delete_image')}}</a>
+                                            href="{{aurl('post/image_post/'.$post->id)}}"
+                                            class="btn btn-default btn-outlines btn-circle"><i
+                                                class="fa fa-trash"></i>{{trans('admin.delete_image')}}</a>
                                 @endif
                             </div>
                         </div>

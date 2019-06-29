@@ -201,6 +201,7 @@ class ProductController extends Controller
             'product_name_ar' => request('product_name_ar'),
             'description_en' => request('description_en'),
             'description_ar' => request('description_ar'),
+            'department_id' => request('department_id'),
             'price' => request('price'),
             'draftsmen_id' => request('draftsmen_id'),
             'qyt' => request('qyt'),

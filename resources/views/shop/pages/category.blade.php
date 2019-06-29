@@ -150,11 +150,11 @@
             <div class="col-md-9">
                 <div class="box">
                     @if(app('l') == 'en')
-                    <h1>{{dep_parent($tag,'dep_name_en')}}</h1>
-                    {!! dep_parent($tag,'description_en') !!}
-                        @else
-                    <h1>{{dep_parent($tag,'dep_name_ar')}}</h1>
-                    {!! dep_parent($tag,'description_ar') !!}
+                        <h1>{{dep_parent($dep->id,'dep_name_en')}}</h1>
+                        {!! dep_parent($dep->id,'description_en') !!}
+                    @else
+                        <h1>{{dep_parent($dep->id,'dep_name_ar')}}</h1>
+                        {!! dep_parent($dep->id,'description_ar') !!}
                     @endif
                 </div>
 

@@ -69,7 +69,7 @@ Route::group(['prefix' => '/', 'middleware' => 'Lang'], function () {
 
         Route::post('/bloger/New_news', 'thame\bloger\HomeController@New_news');
 
-        // Route::post('/user_post', 'thame\home\HomeController@User_create');
+        Route::post('/user_post', 'thame\home\HomeController@User_create');
 
         Route::group(['middleware' => 'UserGuest'], function () {
 

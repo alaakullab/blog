@@ -211,6 +211,22 @@ class PostController extends Controller
 
     }
 
+    public function image_post($id)
+    {
+        $post = Post::find($id);
+
+        if (!empty($post->image_post)) {
+            Storage::has($post->image_post) ? Storage::delete($post->image_post) : '';
+
+        }
+        $post->image_post = null ;
+        $post->save();
+        session()->flash('success', trans('admin.deleted_image'));
+        return back();
+
+
+    }
+
     public function destroy($id)
     {
         $post = Post::find($id);

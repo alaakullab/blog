@@ -71,7 +71,8 @@ Route::group(['prefix' => app('admin'), 'middleware' => 'Lang'], function () {
         Route::resource('partner', 'Admin\PartnerController');
         Route::get('send', 'Admin\SendController@index');
 		Route::post('send', 'Admin\SendController@store');
-		Route::post('hire/multi_delete', 'Admin\HireController@multi_delete');
+        Route::get('post/image_post/{id}', 'Admin\PostController@image_post');
+        Route::post('hire/multi_delete', 'Admin\HireController@multi_delete');
 		Route::post('order/multi_delete', 'Admin\OrderController@multi_delete');
 		Route::post('tag/multi_delete', 'Admin\TagController@multi_delete');
 		Route::post('/post/multi_delete', 'Admin\PostController@multi_delete');
