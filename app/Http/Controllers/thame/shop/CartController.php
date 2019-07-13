@@ -63,7 +63,8 @@ class CartController extends Controller
     {
         $product = Product::find($productId);
 //        Cart::add(['id' => $productId, 'name' =>$product->product_name_en, 'qty' => 1, 'price' => $product->price]);
-        Cart::add($productId, $product->product_name_en, 1, $product->price);
+        print_r(Cart::add($productId, $product->product_name_en, 1, $product->price));
+        toastr()->success(trans('admin.Success'), trans('admin.Add_to_cart'));
         return back();
     }
 
@@ -149,7 +150,7 @@ class CartController extends Controller
             'currency' => 'usd',
             'source' => $token,
             'description' => 'Example charge',
-        ]);
+      ]);
         // crate the order
         Order::createOrder();
 //		dd('ok');

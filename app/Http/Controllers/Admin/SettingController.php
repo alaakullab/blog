@@ -85,7 +85,7 @@ class SettingController extends Controller
                 $data['logo'] = it()->upload('logo','setting');
             }
 		Setting::where('id',1)->update($data);
-		session()->flash('success',trans('admin.updated'));
+		toastr()->success(trans('admin.Success'),trans('admin.updated'));
 
 		return back();
 		

@@ -34,6 +34,7 @@
     <link href="{{url('shop/css/animate.min.css')}}" rel="stylesheet">
     <link href="{{url('shop/css/owl.carousel.css')}}" rel="stylesheet">
     <link href="{{url('shop/css/owl.theme.css')}}" rel="stylesheet">
+    @toastr_css
     @if(app('l') == 'ar')
 
 

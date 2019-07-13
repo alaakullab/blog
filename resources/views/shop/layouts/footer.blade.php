@@ -70,10 +70,10 @@ _________________________________________________________ -->
 
                 @if(app('l')=='en')
                 {!! setting('site_desc_en') !!}
-                
+
                 @else
                 {!! setting('site_desc_ar') !!}
-                
+
                 @endif
 <br>
                 <a href="{{url('E-commerce/contact')}}">{{trans('admin.Go_to_contact_page')}}</a>
@@ -178,8 +178,10 @@ ____________________________________________ -->
 <script src="{{url('shop/js/bootstrap-hover-dropdown.js')}}"></script>
 <script src="{{url('shop/js/owl.carousel.min.js')}}"></script>
 <script src="{{url('shop/js/front.js')}}"></script>
-{!! NoCaptcha::renderJs() !!}
 
+{!! NoCaptcha::renderJs() !!}
+@toastr_js
+@toastr_render
 @stack('js')
 
 </body>

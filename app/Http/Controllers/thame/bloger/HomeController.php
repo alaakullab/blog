@@ -138,7 +138,7 @@ class HomeController extends Controller
         //add Role
         $user->roles()->attach(Role::where('name', 'User')->first());
 
-        // session()->flash('success',trans('admin.added'));
+        // toastr()->success(trans('admin.Success'),trans('admin.added'));
         auth()->guard('web')->login($user);
         // auth()->guard('web')->attempt(['email' =>$data['email'], 'password' => $data['password']]);
         return redirect('bloger');
@@ -399,7 +399,7 @@ class HomeController extends Controller
         }
         Post::create($data);
 
-        session()->flash('success', trans('admin.added'));
+        toastr()->success(trans('admin.Success'), trans('admin.added'));
         return redirect('bloger');
     }
 
@@ -468,7 +468,7 @@ class HomeController extends Controller
         }
         Post::where(['id' => $id, 'user_id' => \Auth::user()->id])->update($data);
 
-        session()->flash('success', trans('admin.updated'));
+        toastr()->success(trans('admin.Success'), trans('admin.updated'));
         return redirect('bloger/post/' . $id);
     }
 

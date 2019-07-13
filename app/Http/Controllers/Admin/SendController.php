@@ -50,7 +50,7 @@ class SendController extends Controller
         $email = $data['email'];
         if ($email != null) {
             Mail::to($email)->send(new Send($desc, $title));
-            session()->flash('success', trans('admin.send_email'));
+            toastr()->success(trans('admin.Success'), trans('admin.send_email'));
 
             return back();
 
@@ -59,7 +59,7 @@ class SendController extends Controller
             foreach ($send as $send) {
                 Mail::to($send->email_news)->send(new Send($desc, $title));
             }
-            session()->flash('success', trans('admin.send_all'));
+            toastr()->success(trans('admin.Success'), trans('admin.send_all'));
 
             return back();
         }
@@ -74,7 +74,7 @@ class SendController extends Controller
         }
 
         @$Hire->delete();
-        session()->flash('success', trans('admin.deleted'));
+        toastr()->success(trans('admin.Success'), trans('admin.deleted'));
         return back();
     }
 
@@ -90,7 +90,7 @@ class SendController extends Controller
                 }
                 @$Hire->delete();
             }
-            session()->flash('success', trans('admin.deleted'));
+            toastr()->success(trans('admin.Success'), trans('admin.deleted'));
             return back();
         } else {
             $Hire = Hire::find($data);
@@ -99,7 +99,7 @@ class SendController extends Controller
                 Storage::has($Hire->file) ? Storage::delete($Hire->file) : '';
             }
             @$Hire->delete();
-            session()->flash('success', trans('admin.deleted'));
+            toastr()->success(trans('admin.Success'), trans('admin.deleted'));
             return back();
         }
     }

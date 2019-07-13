@@ -62,7 +62,7 @@ class Home_loginController extends Controller
 
         HomeLogin::where('id',$id)->update($data);
 
-              session()->flash('success',trans('admin.updated'));
+              toastr()->success(trans('admin.Success'),trans('admin.updated'));
         return back();
     }
 

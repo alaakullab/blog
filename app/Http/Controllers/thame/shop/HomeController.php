@@ -109,10 +109,10 @@ if(request('orderBy') == 'Low')
         // auth()->guard('web')->attempt();
         $rememberme = true;
         if (!auth()->guard('web')->attempt(['email' => request('email'), 'password' => request('password')], $rememberme)) {
-            return back()->withErrors([
-                'massage' => 'Email or password not correct !!',
-            ]);
+            toastr()->error(trans('admin.login_failed'));
+            return back();
         }
+        toastr()->success(trans('admin.Success'),trans('admin.Login_successful'));
         return back();
 
     }
@@ -129,7 +129,7 @@ if(request('orderBy') == 'Low')
         if (auth()->guard('web')->attempt(['email' => request('email'), 'password' => request('password')], $rememberme)) {
             return redirect('E-commerce');
         } else {
-            session()->flash('error', trans('admin.error_loggedin'));
+            toastr()->error(trans('admin.Error'),trans('admin.error_loggedin'));
             return redirect('E-commerce/register');
         }
 
@@ -147,7 +147,7 @@ if(request('orderBy') == 'Low')
         if (auth()->guard('web')->attempt(['email' => request('email'), 'password' => request('password')], $rememberme)) {
             return back();
         } else {
-            session()->flash('error', trans('admin.error_loggedin'));
+            toastr()->error(trans('admin.Error'), trans('admin.error_loggedin'));
             return back();
         }
 
@@ -155,8 +155,16 @@ if(request('orderBy') == 'Low')
 
     public function logout()
     {
-        auth()->guard('web')->logout();
-        return redirect('/E-commerce');
+        $status = auth()->guard('web')->logout();
+        if ($status == null)
+        {
+            toastr()->success(trans('admin.Success'), trans('admin.Logout_successful'));
+        }
+        else
+        {
+            toastr()->error(trans('admin.Error'), trans('admin.Error_logout'));
+        }
+        return back();
     }
 
     /**
@@ -257,7 +265,7 @@ if(request('orderBy') == 'Low')
         //add Role
         $user->roles()->attach(Role::where('name', 'User')->first());
 
-        // session()->flash('success',trans('admin.added'));
+        // toastr()->success(trans('admin.Success'),trans('admin.added'));
         auth()->guard('web')->login($user);
         // auth()->guard('web')->attempt(['email' =>$data['email'], 'password' => $data['password']]);
         return redirect('E-commerce');
@@ -285,7 +293,7 @@ if(request('orderBy') == 'Low')
         //add Role
         $user->roles()->attach(Role::where('name', 'User')->first());
 
-        // session()->flash('success',trans('admin.added'));
+        // toastr()->success(trans('admin.Success'),trans('admin.added'));
         auth()->guard('web')->login($user);
         // auth()->guard('web')->attempt(['email' =>$data['email'], 'password' => $data['password']]);
         return back();
@@ -297,6 +305,7 @@ if(request('orderBy') == 'Low')
         $wishlist->user_id = \Auth::user()->id;
         $wishlist->product_id = $id;
         $wishlist->save();
+        toastr()->success(trans('admin.Success'), trans('admin.Add_to_wishlist'));
         return back();
     }
 

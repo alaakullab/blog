@@ -62,7 +62,7 @@ class AdminController extends Controller
         $data['password'] = bcrypt(request('password'));
         Admin::create($data);
 
-        session()->flash('success', trans('admin.added'));
+        toastr()->success(trans('admin.Success'), trans('admin.added'));
         return redirect(aurl('Admin'));
     }
 
@@ -114,7 +114,7 @@ class AdminController extends Controller
         $data['password'] = bcrypt(request('password'));
         Admin::where('id', $id)->update($data);
 
-        session()->flash('success', trans('admin.updated'));
+        toastr()->success(trans('admin.Success'), trans('admin.updated'));
         return redirect(aurl('Admin'));
     }
 
@@ -130,7 +130,7 @@ class AdminController extends Controller
 
 
         @$Admin->delete();
-        session()->flash('success', trans('admin.deleted'));
+        toastr()->success(trans('admin.Success'), trans('admin.deleted'));
         return back();
     }
 
@@ -144,14 +144,14 @@ class AdminController extends Controller
 
                 @$Admin->delete();
             }
-            session()->flash('success', trans('admin.deleted'));
+            toastr()->success(trans('admin.Success'), trans('admin.deleted'));
             return back();
         } else {
             $Admin = Admin::find($data);
 
 
             @$Admin->delete();
-            session()->flash('success', trans('admin.deleted'));
+            toastr()->success(trans('admin.Success'), trans('admin.deleted'));
             return back();
         }
     }

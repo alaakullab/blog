@@ -44,7 +44,7 @@ class HireController extends Controller
         }
 
         @$Hire->delete();
-        session()->flash('success', trans('admin.deleted'));
+        toastr()->success(trans('admin.Success'), trans('admin.deleted'));
         return back();
     }
 
@@ -60,7 +60,7 @@ class HireController extends Controller
                 }
                 @$Hire->delete();
             }
-            session()->flash('success', trans('admin.deleted'));
+            toastr()->success(trans('admin.Success'), trans('admin.deleted'));
             return back();
         } else {
             $Hire = Hire::find($data);
@@ -69,7 +69,7 @@ class HireController extends Controller
                 Storage::has($Hire->file) ? Storage::delete($Hire->file) : '';
             }
             @$Hire->delete();
-            session()->flash('success', trans('admin.deleted'));
+            toastr()->success(trans('admin.Success'), trans('admin.deleted'));
             return back();
         }
     }

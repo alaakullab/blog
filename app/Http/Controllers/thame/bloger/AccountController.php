@@ -47,7 +47,7 @@ class AccountController extends Controller
 
         ]);
         Informations_users::where('user_id', \Auth::user()->id)->update($data);
-        session()->flash('success', trans('admin.updated'));
+        toastr()->success(trans('admin.Success'), trans('admin.updated'));
         return back();
     }
 
@@ -73,7 +73,7 @@ class AccountController extends Controller
 
             ]);
             $user->update(['password' => bcrypt(request('password'))]);
-            session()->flash('success', trans('admin.updated'));
+            toastr()->success(trans('admin.Success'), trans('admin.updated'));
 
             return redirect('E-commerce/account')
                 ->with('notificationText', trans('admin.User_Password_Changed_Successfully!'));
@@ -127,7 +127,7 @@ class AccountController extends Controller
     public function exp_id($id)
     {
         @Experience::where('id', $id)->delete();
-        session()->flash('success', trans('admin.deleted'));
+        toastr()->success(trans('admin.Success'), trans('admin.deleted'));
         return back();
 
     }
@@ -146,7 +146,7 @@ class AccountController extends Controller
         ]);
         $data['user_id'] = \Auth::user()->id;
         Experience::create($data);
-        session()->flash('success', trans('admin.added'));
+        toastr()->success(trans('admin.Success'), trans('admin.added'));
 
         return back();
 
@@ -196,7 +196,7 @@ class AccountController extends Controller
             $de->user_id = \Auth::user()->id;
             $de->save();
         }
-        session()->flash('success', trans('admin.updated'));
+        toastr()->success(trans('admin.Success'), trans('admin.updated'));
 
         return back();
     }
@@ -224,7 +224,7 @@ class AccountController extends Controller
         }
         // return dd($data['user_image']);
         User::where('id', \Auth::user()->id)->update($data);
-        session()->flash('success', trans('admin.updated'));
+        toastr()->success(trans('admin.Success'), trans('admin.updated'));
 
         return back();
     }

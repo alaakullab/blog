@@ -49,13 +49,30 @@ class UserController extends Controller {
 
 	}
 	public function logout() {
-		auth()->guard('web')->logout();
-		return redirect('/bloger');
+        $status = auth()->guard('web')->logout();
+        if ($status == null)
+        {
+            toastr()->success(trans('admin.Success'), trans('admin.Logout_successful'));
+        }
+        else
+        {
+            toastr()->error(trans('admin.Error'), trans('admin.Error_logout'));
+        }
+        return back();
+
 	}
 	
 	public function logout_any() {
-		auth()->guard('web')->logout();
-		return back();
+        $status = auth()->guard('web')->logout();
+        if ($status == null)
+        {
+            toastr()->success(trans('admin.Success'), trans('admin.Logout_successful'));
+        }
+        else
+        {
+            toastr()->error(trans('admin.Error'), trans('admin.Error_logout'));
+        }
+        return back();
 	}
 	public function User_create() {
 		$rules = [
@@ -87,7 +104,7 @@ class UserController extends Controller {
 
 		// User::create($data);
 
-		// session()->flash('success',trans('admin.added'));
+		// toastr()->success(trans('admin.Success'),trans('admin.added'));
 		auth()->guard('web')->attempt(['email' => $data['email'], 'password' => $data['password']]);
 		return redirect('/');
 	}

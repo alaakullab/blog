@@ -33,13 +33,14 @@
     <!-- MAIN CSS -->
     <link rel="stylesheet" href="{{url('blog/-ltr/')}}/css/templatemo-style.css">
     <link rel="shortcut icon" href="{{ Storage::url( setting()->icon ) }}">
+
     @if(app('direction') == '-rtl')
         <link rel="stylesheet" href="{{url('blog/-rtl')}}/css/custom.css">
     @endif
     <link href="https://vitalets.github.io/x-editable/assets/select2/select2.css" rel="stylesheet">
     <script src="https://vitalets.github.io/x-editable/assets/select2/select2.js"></script>
     @stack('css')
-
+    @toastr_css
 </head>
 <body id="top" data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
 

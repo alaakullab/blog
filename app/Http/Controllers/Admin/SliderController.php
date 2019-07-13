@@ -62,7 +62,7 @@ class SliderController extends Controller
         }
         Slider::where('id', $id)->update($data);
 
-        session()->flash('success', trans('admin.updated'));
+        toastr()->success(trans('admin.Success'), trans('admin.updated'));
         return redirect(aurl('slider'));
     }
 

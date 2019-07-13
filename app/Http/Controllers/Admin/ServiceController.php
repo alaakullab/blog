@@ -57,7 +57,7 @@ class ServiceController extends Controller
         $data['admin_id'] = admin()->user()->id;
         service::where('id', $id)->update($data);
 
-        session()->flash('success', trans('admin.updated'));
+        toastr()->success(trans('admin.Success'), trans('admin.updated'));
         return redirect(aurl('service'));
     }
 

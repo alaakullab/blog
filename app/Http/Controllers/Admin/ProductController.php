@@ -106,7 +106,7 @@ class ProductController extends Controller
             // $data['image_product'] = it()->upload('image_product', 'product');
         }
 //        return dd($data);
-        session()->flash('success', trans('admin.added'));
+        toastr()->success(trans('admin.Success'), trans('admin.added'));
         return redirect(aurl('product'));
     }
 
@@ -207,7 +207,7 @@ class ProductController extends Controller
             'qyt' => request('qyt'),
         ]);
 
-        session()->flash('success', trans('admin.updated'));
+        toastr()->success(trans('admin.Success'), trans('admin.updated'));
         return redirect(aurl('product'));
     }
 
@@ -233,7 +233,7 @@ class ProductController extends Controller
 
 
             Product::where('id', $id)->forceDelete();
-            session()->flash('success', trans('admin.deleted'));
+            toastr()->success(trans('admin.Success'), trans('admin.deleted'));
             return back();
 
         } else {
@@ -244,7 +244,7 @@ class ProductController extends Controller
               }
           }
             @$product->delete();
-            session()->flash('success', trans('admin.deleted'));
+            toastr()->success(trans('admin.Success'), trans('admin.deleted'));
             return back();
         }
     }
@@ -255,7 +255,7 @@ class ProductController extends Controller
         @Storage::has($Files->full_path) ? Storage::delete($Files->full_path) : '';
 
         @Files::where('id', $id)->forceDelete();
-        session()->flash('success', trans('admin.deleted'));
+        toastr()->success(trans('admin.Success'), trans('admin.deleted'));
         return back();
     }
 
@@ -277,7 +277,7 @@ class ProductController extends Controller
                 Product::where('id', $id)->restore();
 
             }
-            session()->flash('success', trans('admin.recovered'));
+            toastr()->success(trans('admin.Success'), trans('admin.recovered'));
             return back();
         }
         if (is_array($data)) {
@@ -294,7 +294,7 @@ class ProductController extends Controller
 
                 @$product->delete();
             }
-            session()->flash('success', trans('admin.deleted'));
+            toastr()->success(trans('admin.Success'), trans('admin.deleted'));
             return back();
         } else {
             $product = Product::find($data);
@@ -308,7 +308,7 @@ class ProductController extends Controller
             }
 
             @$product->delete();
-            session()->flash('success', trans('admin.deleted'));
+            toastr()->success(trans('admin.Success'), trans('admin.deleted'));
             return back();
         }
     }

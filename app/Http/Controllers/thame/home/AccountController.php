@@ -19,8 +19,16 @@ class AccountController extends Controller
 
     public function logout()
     {
-        auth()->guard('web')->logout();
-        return redirect('/bloger');
+        $status = auth()->guard('web')->logout();
+        if ($status == null)
+        {
+            toastr()->success(trans('success'), trans('admin.Logout_successful'));
+        }
+        else
+        {
+            toastr()->error(trans('error'), trans('admin.Error_logout'));
+        }
+        return back();
     }
 
     /**
@@ -64,7 +72,7 @@ class AccountController extends Controller
           $de->Phone = request('Phone');
           $de->save();
         }
-        session()->flash('success', trans('admin.updated'));
+        toastr()->success(trans('admin.Success'), trans('admin.updated'));
         return back();
     }
 
@@ -83,7 +91,7 @@ class AccountController extends Controller
         }
         // return dd(request()->hasFile('user_image'));
         User::where('id', \Auth::user()->id)->update(['user_image' => $user_image]);
-        session()->flash('success', trans('admin.updated'));
+        toastr()->success(trans('admin.Success'), trans('admin.updated'));
 
         return back();
     }

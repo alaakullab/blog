@@ -55,6 +55,7 @@
         @endif
 @stack('css')
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
+        @toastr_css
     </head>
     <!-- END HEAD -->
     <body class="page-container-bg-solid page-header-fixed page-sidebar-closed-hide-logo">

@@ -131,7 +131,7 @@ class HomeController extends Controller
 
         HireComment::create($data);
 
-        session()->flash('success', trans('admin.added'));
+        toastr()->success(trans('admin.Success'), trans('admin.added'));
         return response()->json($data);
     }
 

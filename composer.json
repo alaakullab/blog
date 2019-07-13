@@ -22,7 +22,8 @@
         "phpanonymous/it": "^1.0",
         "weboap/visitor": "^2.0",
         "willvincent/laravel-rateable": "^1.07",
-        "yajra/laravel-datatables": "1.0"
+        "yajra/laravel-datatables": "1.0",
+        "yoeunes/toastr": "^1.2"
     },
     "require-dev": {
         "filp/whoops": "^2.0",

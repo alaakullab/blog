@@ -21,16 +21,23 @@ class AdminAuthenticated extends Controller
     {
         $rememberme = request('rememberme') == 1 ? true : false;
         if (admin()->attempt(['email' => request('email'), 'password' => request('password')], $rememberme)) {
+            toastr()->success(trans('admin.Success'), trans('admin.Login_successful'));
             return redirect(aurl(''));
         } else {
-            session()->flash('error', trans('admin.error_loggedin'));
+
+            toastr()->error(trans('error'), trans('admin.error_loggedin'));
             return redirect(aurl('login'));
         }
     }
 
     public function logout()
     {
-        admin()->logout();
+        $status = admin()->logout();
+        if ($status == null) {
+            toastr()->success(trans('admin.Success'), trans('admin.Logout_successful'));
+        } else {
+            toastr()->error(trans('admin.Error'), trans('admin.Error_logout'));
+        }
         return redirect(aurl(''));
     }
 
@@ -49,7 +56,7 @@ class AdminAuthenticated extends Controller
 
         if (!empty($token)) {
             $admin = Admin::where('email', $token->email)->update(['password' => bcrypt(request('password'))]);
-            session()->flash('success', trans('admin.password_is_changed'));
+            toastr()->success(trans('admin.Success'), trans('admin.password_is_changed'));
             if (request()->has('andlogin')) {
                 auth()->guard('admin')->attempt(['email' => $token->email, 'password' => request('password')]);
                 return redirect(aurl('/'));
@@ -57,7 +64,7 @@ class AdminAuthenticated extends Controller
             DB::table('password_resets')->where('token', $token)->delete();
             return redirect(aurl('login'));
         } else {
-            session()->flash('error', trans('admin.time_token_ended'));
+            toastr()->error(trans('admin.Error'), trans('admin.time_token_ended'));
             return redirect(aurl('login'));
         }
     }
@@ -66,7 +73,7 @@ class AdminAuthenticated extends Controller
     {
         $token = DB::table('password_resets')->where('token', $token)->where('created_at', '>', Carbon::now()->subHours(2))->first();
 
-        empty($token) ? session()->flash('error', trans('admin.time_token_ended')) : '';
+        empty($token) ? toastr()->error(trans('admin.Error'), trans('admin.time_token_ended')) : '';
 
         return !empty($token) ? view('admin.reset_password', ['token' => $token]) :
             redirect(aurl('login'));
@@ -87,10 +94,10 @@ class AdminAuthenticated extends Controller
                 'url' => aurl('password/reset/' . $token),
                 'data' => $user,
             ]));
-            session()->flash('success', trans('admin.reset_link_sent'));
+            toastr()->success(trans('admin.Success'), trans('admin.reset_link_sent'));
             return redirect(aurl('login'));
         } else {
-            session()->flash('error', trans('admin.email_not_found'));
+            toastr()->error(trans('admin.Error'), trans('admin.email_not_found'));
             return redirect(aurl('login'));
         }
     }

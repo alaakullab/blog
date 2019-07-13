@@ -102,7 +102,7 @@ class PostController extends Controller
         }
         Post::create($data);
 
-        session()->flash('success', trans('admin.added'));
+        toastr()->success(trans('admin.Success'), trans('admin.added'));
         return redirect(aurl('post'));
     }
 
@@ -193,7 +193,7 @@ class PostController extends Controller
         }
 
         Post::where('id', $id)->update($data);
-        session()->flash('success', trans('admin.updated'));
+        toastr()->success(trans('admin.Success'), trans('admin.updated'));
 
        return redirect(aurl('post'));
     }
@@ -221,7 +221,7 @@ class PostController extends Controller
         }
         $post->image_post = null ;
         $post->save();
-        session()->flash('success', trans('admin.deleted_image'));
+        toastr()->success(trans('admin.Success'), trans('admin.deleted_image'));
         return back();
 
 
@@ -232,7 +232,7 @@ class PostController extends Controller
         $post = Post::find($id);
         if (request()->has('delete')) {
             Post::where('id', $id)->forceDelete();
-            session()->flash('success', trans('admin.deleted'));
+            toastr()->success(trans('admin.Success'), trans('admin.deleted'));
   return back();
 
         } else {
@@ -241,7 +241,7 @@ class PostController extends Controller
             }
 
             @$post->delete();
-            session()->flash('success', trans('admin.deleted'));
+            toastr()->success(trans('admin.Success'), trans('admin.deleted'));
             return back();
         }
 
@@ -256,7 +256,7 @@ class PostController extends Controller
                     Post::where('id', $id)->restore();
 
                 }
-                session()->flash('success', trans('admin.recovered'));
+                toastr()->success(trans('admin.Success'), trans('admin.recovered'));
                 return back();
             }
         }
@@ -269,7 +269,7 @@ class PostController extends Controller
                     }
                     Post::where('id', $id)->forceDelete();
                 }
-                session()->flash('success', trans('admin.deleted'));
+                toastr()->success(trans('admin.Success'), trans('admin.deleted'));
                 return back();
 
             }
@@ -281,7 +281,7 @@ class PostController extends Controller
 
                 @$post->delete();
             }
-            session()->flash('success', trans('admin.deleted'));
+            toastr()->success(trans('admin.Success'), trans('admin.deleted'));
             return back();
         } else {
             $post = Post::find($data);
@@ -290,7 +290,7 @@ class PostController extends Controller
             }
 
             @$post->delete();
-            session()->flash('success', trans('admin.deleted'));
+            toastr()->success(trans('admin.Success'), trans('admin.deleted'));
             return back();
         }
     }
