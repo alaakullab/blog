@@ -46,7 +46,7 @@
                         <h2>{{trans('admin.Quick_Links')}}</h2>
                         <ul>
                             <li><a href="{{url('bloger')}}">{{trans('admin.blog')}}</a></li>
-                            <li><a href="{{url('E-commerce')}}">{{trans('admin.story')}}</a></li>
+                            <li><a href="{{url('E-commerce')}}">{{trans('admin.store')}}</a></li>
                             <li><a href="{{url('Hire')}}">{{trans('admin.hire')}}</a></li>
                             <li><a href="{{url('Partner')}}">{{trans('admin.partner')}}</a></li>
                         </ul>
