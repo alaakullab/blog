@@ -39,8 +39,8 @@
                                             <td colspan="2">{{ trans('admin.product_name') }}</td>
                                             <td>{{ trans('admin.Quantity') }}</td>
                                             <td>{{ trans('admin.Unit_price') }}</td>
+                                            <td>{{ trans('admin.Tax') }}</td>
                                             {{-- <td>Discount</td> --}}
-                                            <td colspan="2">{{ trans('admin.total') }}</td>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -56,8 +56,7 @@
 
                                         <td>{{$cartItem->qty}}</td>
                                         <td>${{$cartItem->price}}</td>
-{{--                                        <td>${{Cart::tax()}}</td>--}}
-                                        {{-- <td>$246.00</td> --}}
+                                        <td>${{Cart::tax()}}</td>
                                     </tr>
                                  @endforeach
                                     </tbody>
@@ -105,10 +104,10 @@
                                     <td>{{ trans('admin.Order_subtotal') }}</td>
                                     <th>${{Cart::subtotal()}}</th>
                                 </tr>
-                                {{--<tr>--}}
-                                    {{--<td>{{ trans('admin.Tax') }}</td>--}}
-                                    {{--<th>${{Cart::tax()}}</th>--}}
-                                {{--</tr>--}}
+                                <tr>
+                                    <td>{{ trans('admin.Tax') }}</td>
+                                    <th>${{Cart::tax()}}</th>
+                                </tr>
                                 <tr class="total">
                                     <td>{{ trans('admin.total') }}</td>
                                     <th>{{Cart::total()}}</th>

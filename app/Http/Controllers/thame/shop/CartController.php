@@ -21,37 +21,6 @@ class CartController extends Controller
         return view('shop.pages.cart', ['cartItems' => $cartItems, 'title' => trans('admin.Shopping_cart')]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -99,10 +68,12 @@ class CartController extends Controller
         if (request()->has('payment') == 'Payment') {
             $key = 'Payment';
             return redirect('/E-commerce/Order/Payment');
-        }
-        if (request()->has('Paypal') == 'Paypal') {
+        }elseif (request()->has('Paypal') == 'Paypal') {
             $key = 'Paypal';
             return redirect('/E-commerce/Order/Paypal');
+        }else{
+            toastr()->error(trans('admin.Error'), trans('admin.Plz_method_of_payment'));
+            return back();
         }
     }
 
@@ -144,16 +115,20 @@ class CartController extends Controller
         $cartt = str_replace('.', '', $c);
 // Token is created using Checkout or Elements!
         // Get the payment token ID submitted by the form:
+        $cartItems = Cart::Content();
+        foreach ($cartItems as $cartItem) {
+            $item_names[] = $cartItem->name;
+        }
+        $item_name = implode(" , ", $item_names);
         $token = $_POST['stripeToken'];
         $charge = \Stripe\Charge::create([
             'amount' => $cartt,
             'currency' => 'usd',
             'source' => $token,
-            'description' => 'Example charge',
+            'description' => $item_name,
       ]);
         // crate the order
         Order::createOrder();
-//		dd('ok');
         return redirect('/E-commerce/done');
     }
 

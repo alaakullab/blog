@@ -318,5 +318,5 @@ return [
     "Success" => "Success",
     "Error" => "Error!",
     "login_failed" => "Email or password not correct !!",
-
+    "Plz_method_of_payment" => "Please select the method of payment.",
 ];

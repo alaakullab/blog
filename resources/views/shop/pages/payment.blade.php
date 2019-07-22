@@ -50,7 +50,6 @@
     var form = document.getElementById('payment-form');
     form.addEventListener('submit', function(event) {
         event.preventDefault();
-
         stripe.createToken(card).then(function(result) {
             if (result.error) {
                 // Inform the user if there was an error.
@@ -100,6 +99,8 @@
 
         // Submit the form
         form.submit();
+        $('#submit_payment').prop('disabled', true);
+        // setTimeout(()=>{$('#submit_payment').prop('disabled', false);},7000);
     }
 </script>
 
@@ -132,8 +133,6 @@
      }
  </style>
     @endpush
-
-
 
         <div class="container">
 
@@ -189,7 +188,7 @@
                             <a href="{{url('/E-commerce/payment-method')}}" class="btn btn-default"><i @if(app('l') == 'en') class="fa fa-chevron-left"  @else class="fa fa-chevron-right"  @endif></i>@awt('Back to Payment method','en')</a>
                         </div>
                         <div class="pull-right">
-                            <button type="submit" class="btn btn-primary">@awt('Place an order','en')<i
+                            <button type="submit" id="submit_payment" class="btn btn-primary">@awt('Place an order','en')<i
                                     @if(app('l') == 'en') class="fa fa-chevron-right"  @else class="fa fa-chevron-left"   @endif></i>
                             </button>
                         </div>
