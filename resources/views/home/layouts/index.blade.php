@@ -150,7 +150,11 @@
                                    required="">
 
                             <input type="password" name="password" class="form-control"
-                                   placeholder="{{trans('admin.password')}}" required="">
+                                   placeholder="{{trans('admin.password')}}" required=""
+                                   pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
+
+                            {{--                            <input type="password" name="password_confirmation" class="form-control"--}}
+                            {{--                                   placeholder="{{trans('admin.password_confirmation')}}" required="" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" >--}}
 
                             <button class="submit-btn form-control"
                                     id="form-submit">{{trans('admin.Sign_Up_sub')}}</button>
@@ -265,7 +269,7 @@
                                             <div class="courses-date display-none">
                                                 <span> <i class="fa fa-calendar"></i> {{ $last->created_at->format('Y-m-d') }}</span>
                                                 @if (date('Y-m-d',strtotime($last->created_at)) >= date('Y-m-d'))
-                                                <span> <i class="fa fa-clock-o"></i> {{ 24 - date('H',strtotime($last->created_at->format('h:i:sa')) - strtotime(date('h:i:sa'))) }} Hours </span>
+                                                    <span> <i class="fa fa-clock-o"></i> {{ 24 - date('H',strtotime($last->created_at->format('h:i:sa')) - strtotime(date('h:i:sa'))) }} Hours </span>
                                                 @endif
                                             </div>
                                         </div>
