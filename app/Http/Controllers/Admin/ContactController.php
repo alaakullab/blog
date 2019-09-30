@@ -63,7 +63,7 @@ class ContactController extends Controller
         }
 
         @$Contact->delete();
-        session()->flash('success', trans('admin.deleted'));
+        toastr()->success(trans('admin.Success'), trans('admin.deleted'));
         return back();
     }
 
@@ -79,7 +79,7 @@ class ContactController extends Controller
                 }
                 @$Contact->delete();
             }
-            session()->flash('success', trans('admin.deleted'));
+            toastr()->success(trans('admin.Success'), trans('admin.deleted'));
             return back();
         } else {
             $Contact = Contact::find($data);
@@ -88,7 +88,7 @@ class ContactController extends Controller
                 Storage::has($Contact->file) ? Storage::delete($Contact->file) : '';
             }
             @$Contact->delete();
-            session()->flash('success', trans('admin.deleted'));
+            toastr()->success(trans('admin.Success'), trans('admin.deleted'));
             return back();
         }
     }

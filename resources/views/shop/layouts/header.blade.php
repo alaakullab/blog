@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="{{setting()->site_desc_en}}">
     <meta name="author" content="Ondrej Svestka | ondrejsvestka.cz">
-              <meta name="keywords" content="{{setting()->keyword}}">
+    <meta name="keywords" content="{{setting()->keyword}}">
 
     <title>
         {{setting('site_name_'.app('l'))}}--{{empty($title)? '' : $title }}  </title>
@@ -19,12 +19,12 @@
     <link rel="shortcut icon" href="{{ Storage::url( setting()->icon ) }}">
 
     @stack('css')
-@if(app('l') == 'ar')
+    @if(app('l') == 'ar')
 
 
-    {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-rtl/3.4.0/css/bootstrap-rtl.css" rel="stylesheet"> --}}
+        {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-rtl/3.4.0/css/bootstrap-rtl.css" rel="stylesheet"> --}}
 
-@endif
+    @endif
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100' rel='stylesheet' type='text/css'>
 
     <!-- styles -->
@@ -42,19 +42,21 @@
 
     <script src="{{url('shop/js/respond.min.js')}}"></script>
     <script src="{{url('shop/js/share-btn.js')}}"></script>
-
-@if(app('l') == 'ar')
-    <link href="https://fonts.googleapis.com/css?family=Cairo" rel="stylesheet">
+    @toastr_css
+    @if(app('l') == 'ar')
+        <link href="https://fonts.googleapis.com/css?family=Cairo" rel="stylesheet">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-rtl/3.4.0/css/bootstrap-rtl.css" rel="stylesheet">
 
-    <link href="{{url('shop/css/rtl.css')}}" rel="stylesheet">
- <style type="text/css">
-.col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12 {
-    float: right;
-}
- html , body , h1 , h2 , h3 , h4 , h5 , h6 , label , div , p , span {
-font-family: 'Cairo', sans-serif;     }
-</style>
+        <link href="{{url('shop/css/rtl.css')}}" rel="stylesheet">
+        <style type="text/css">
+            .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12 {
+                float: right;
+            }
+
+            html, body, h1, h2, h3, h4, h5, h6, label, div, p, span {
+                font-family: 'Cairo', sans-serif;
+            }
+        </style>
     @endif
 
 </head>

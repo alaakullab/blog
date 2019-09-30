@@ -24,7 +24,7 @@ class CommentController extends Controller
     }
 
 
-    public function store()
+    public function store() // اضافة تعليق جديد
     {
         $rules = [
             'content' => 'required',
@@ -49,7 +49,7 @@ class CommentController extends Controller
 
         Comment::create($data);
 
-        session()->flash('success', trans('admin.added'));
+        toastr()->success(trans('admin.Success'), trans('admin.added'));
 //              return back();
         return response()->json($data);
 
@@ -92,7 +92,7 @@ class CommentController extends Controller
         $data['admin_id'] = admin()->user()->id;
         Comment::where('id', $id)->update($data);
 
-        session()->flash('success', trans('admin.updated'));
+        toastr()->success(trans('admin.Success'), trans('admin.updated'));
         return redirect(aurl('comment'));
     }
 
@@ -102,7 +102,7 @@ class CommentController extends Controller
         $comment = Comment::find($id);
 
         @$comment->delete();
-        session()->flash('success', trans('admin.deleted'));
+        toastr()->success(trans('admin.Success'), trans('admin.deleted'));
         return back();
     }
 
@@ -115,13 +115,13 @@ class CommentController extends Controller
 
                 @$comment->delete();
             }
-            session()->flash('success', trans('admin.deleted'));
+            toastr()->success(trans('admin.Success'), trans('admin.deleted'));
             return back();
         } else {
             $comment = Comment::find($data);
 
             @$comment->delete();
-            session()->flash('success', trans('admin.deleted'));
+            toastr()->success(trans('admin.Success'), trans('admin.deleted'));
             return back();
         }
     }

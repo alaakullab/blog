@@ -23,42 +23,44 @@ class HomeController extends Controller
      */
     public function New_news()
     {
-       $rules = [
-         	'email_news' => 'required|string|email|max:255',
+        $rules = [
+            'email_news' => 'required|string|email|max:255',
 
-         ];
-         $data = $this->validate(request(), $rules, [], [
-         	'email_news' => trans('admin.email'),
+        ];
+        $data = $this->validate(request(), $rules, [], [
+            'email_news' => trans('admin.email'),
 
-         ]);
+        ]);
         New_news::create($data);
-      return back();
+        return back();
     }
+
     public function search()
     {
 
         if (app('l') == 'en') {
-            $post = Post::where('title_en','like', request('search').'%')->orderBy('id', 'desc')->limit(9)->get();
+            $post = Post::where('title_en', 'like', request('search') . '%')->orderBy('id', 'desc')->limit(9)->get();
 
         } else {
-            $post = Post::where('title_ar','like', request('search').'%')->orderBy('id', 'desc')->limit(9)->get();
+            $post = Post::where('title_ar', 'like', request('search') . '%')->orderBy('id', 'desc')->limit(9)->get();
         }
-            return view('blog.pages.search', ['title' => trans('home.search_page'), 'posts' => $post,]);
+        return view('blog.pages.search', ['title' => trans('home.search_page'), 'posts' => $post,]);
     }
+
     public function loadDataAjaxsearch()
     {
         $output = '';
         $id = request('id');
         if (app('l') == 'en') {
-            $posts = Post::where('title_en','like', request('search').'%')->where('id', '<', $id)->orderBy('id', 'desc')->limit(9)->get();
+            $posts = Post::where('title_en', 'like', request('search') . '%')->where('id', '<', $id)->orderBy('id', 'desc')->limit(9)->get();
 
         } else {
-            $posts = Post::where('title_ar','like', request('search').'%')->where('id', '<', $id)->orderBy('id', 'desc')->limit(9)->get();
+            $posts = Post::where('title_ar', 'like', request('search') . '%')->where('id', '<', $id)->orderBy('id', 'desc')->limit(9)->get();
         }
         if (!$posts->isEmpty()) {
             foreach ($posts as $post) {
                 $url = url('bloger/post/' . $post->id);
-                $username = $post->user->First_Name ? $post->user->First_Name .' '.$post->user->Last_Name  : $post->user->username ;
+                $username = $post->user->First_Name ? $post->user->First_Name . ' ' . $post->user->Last_Name : $post->user->username;
                 if (app('l') == 'ar') {
                     $titlelang = $post->title_ar;
                     $postlang = $post->content_ar;
@@ -75,29 +77,29 @@ class HomeController extends Controller
                 $output .= '<div>
                             <div class="post">
                                 <h2><a href="' . $url . '"  >' . $titlelang . '</a></h2>
-                                <p class="author-category">' .trans('awt.by'). ' <a href="/bloger/post/. $post->id "  >'.$username.'</a>' .trans('awt.in'). ' <a
-                                        href="' .url('bloger/category/'.$post->tag->name_en). '">'.$tag.'</a>
+                                <p class="author-category">' . trans('awt.by') . ' <a href="/bloger/post/. $post->id "  >' . $username . '</a>' . trans('awt.in') . ' <a
+                                        href="' . url('bloger/category/' . $post->tag->name_en) . '">' . $tag . '</a>
                                 </p>
                                 <hr/>
                                 <p class="date-comments">
-                                    <a href="' . $url . '"  ><i class="fa fa-calendar-o"></i>'.$post->created_at->toDayDateTimeString().'</a>
-                                    <a href="' . $url . '"    ><i class="fa fa-comment-o"></i> ' .count($post->comments). ' ' .trans('awt.comments'). '</a>
+                                    <a href="' . $url . '"  ><i class="fa fa-calendar-o"></i>' . $post->created_at->toDayDateTimeString() . '</a>
+                                    <a href="' . $url . '"    ><i class="fa fa-comment-o"></i> ' . count($post->comments) . ' ' . trans('awt.comments') . '</a>
                                 </p>
                                 <div class="image">
                                     <a href="' . $url . '"   >
-                                        <img src="' .Storage::url( $post->image_post ). '" class="img-responsive"
+                                        <img src="' . Storage::url($post->image_post) . '" class="img-responsive"
                                         alt="Example blog post alt"/>
                                     </a>
                                 </div>
                                 <p class="intro">' . $body . '</p>
                                 <p class="read-more">
-                                    <a href="' . $url . '"   class="btn btn-primary">'.trans('admin.continue_reading').'</a>
+                                    <a href="' . $url . '"   class="btn btn-primary">' . trans('admin.continue_reading') . '</a>
                                 </p>
                             </div>
                         </div>';
             }
             $output .= '<div class="pager" id="remove-row"  >
-                            <button id="btn-more" data-id="' . $post->id . '" class="btn btn-primary btn-lg" >'.trans('admin.load_more').'</button>
+                            <button id="btn-more" data-id="' . $post->id . '" class="btn btn-primary btn-lg" >' . trans('admin.load_more') . '</button>
                         </div>
                         <br/>';
             echo $output;
@@ -111,7 +113,7 @@ class HomeController extends Controller
 
     public function Register()
     {
-        return view('blog.pages.register',['title' => awTtrans('Register','ar')]);
+        return view('blog.pages.register', ['title' => awTtrans('Register', 'ar')]);
     }
 
     public function Register_post()
@@ -136,7 +138,7 @@ class HomeController extends Controller
         //add Role
         $user->roles()->attach(Role::where('name', 'User')->first());
 
-        // session()->flash('success',trans('admin.added'));
+        // toastr()->success(trans('admin.Success'),trans('admin.added'));
         auth()->guard('web')->login($user);
         // auth()->guard('web')->attempt(['email' =>$data['email'], 'password' => $data['password']]);
         return redirect('bloger');
@@ -154,7 +156,7 @@ class HomeController extends Controller
         $tagname = Tag::find($tag);
 
         $posts = Post::where('tag_id', $tag)->orderBy("id", "DESC")->limit(9)->get();
-        return view('blog.pages.post', ['title' => awTtrans('categories','ar'), 'posts' => $posts,'tagname' => $tagname]);
+        return view('blog.pages.post', ['title' => awTtrans('categories', 'ar'), 'posts' => $posts, 'tagname' => $tagname]);
     }
 
     public function loadDataAjaxPosts()
@@ -172,7 +174,7 @@ class HomeController extends Controller
         if (!$posts->isEmpty()) {
             foreach ($posts as $post) {
                 $url = url('bloger/post/' . $post->id);
-                $username = $post->user->First_Name ? $post->user->First_Name .' '.$post->user->Last_Name  : $post->user->username ;
+                $username = $post->user->First_Name ? $post->user->First_Name . ' ' . $post->user->Last_Name : $post->user->username;
 
 //                $editor = $post->user_id == \Auth::user()->id and \Auth::check() and \Auth::user()->hasRole('Editor') ? '<a href="" ><i class="fa fa-edit"></i></a>' : '' ;
                 if (app('l') == 'ar') {
@@ -192,13 +194,13 @@ class HomeController extends Controller
                 $output .= '<div>
                             <div class="post">
                                 <h2><a href="' . $url . '"  >' . $titlelang . '</a></h2>
-                                <p class="author-category">' .trans('awt.by'). ' <a href="/bloger/post/. $post->id "  >'. $username .'</a> ' .trans('awt.in'). ' <a
-                                        href="">'.$tag.'</a>
+                                <p class="author-category">' . trans('awt.by') . ' <a href="/bloger/post/. $post->id "  >' . $username . '</a> ' . trans('awt.in') . ' <a
+                                        href="">' . $tag . '</a>
                                 </p>
                                 <hr/>
                                 <p class="date-comments">
-                                    <a href="' . $url . '"  ><i class="fa fa-calendar-o"></i>'.$post->created_at->toDayDateTimeString().'</a>
-                                    <a href="' . $url . '"    ><i class="fa fa-comment-o"></i>' .count($post->comments). ' ' .trans('awt.comments'). '</a>
+                                    <a href="' . $url . '"  ><i class="fa fa-calendar-o"></i>' . $post->created_at->toDayDateTimeString() . '</a>
+                                    <a href="' . $url . '"    ><i class="fa fa-comment-o"></i>' . count($post->comments) . ' ' . trans('awt.comments') . '</a>
                                 </p>
                                 <div class="image">
                                     <a href="' . $url . '"   >
@@ -208,23 +210,22 @@ class HomeController extends Controller
                                 </div>
                                 <p class="intro">' . $body . '</p>
                                 <p class="read-more">
-                                    <a href="' . $url . '"   class="btn btn-primary">'.trans('admin.continue_reading').'</a>
+                                    <a href="' . $url . '"   class="btn btn-primary">' . trans('admin.continue_reading') . '</a>
                                 </p>
                             </div>
                         </div>';
             }
             if ($tag_id) {
                 $output .= '<div class="pager" id="remove-row"  >
-                            <button id="btn-more" data-id="' . $post->id . '" data-tagid="'. $post->tag_id .'" class="btn btn-primary btn-lg" >'.trans('admin.load_more').'</button>
+                            <button id="btn-more" data-id="' . $post->id . '" data-tagid="' . $post->tag_id . '" class="btn btn-primary btn-lg" >' . trans('admin.load_more') . '</button>
                         </div>
                         <br/>';
             } else {
                 $output .= '<div class="pager" id="remove-row"  >
-                            <button id="btn-more" data-id="' . $post->id . '" class="btn btn-primary btn-lg" >'.trans('admin.load_more').'</button>
+                            <button id="btn-more" data-id="' . $post->id . '" class="btn btn-primary btn-lg" >' . trans('admin.load_more') . '</button>
                         </div>
                         <br/>';
             }
-
 
 
             echo $output;
@@ -266,28 +267,25 @@ class HomeController extends Controller
     public function User_create()
     {
         $rules = [
-            'name' => 'required',
+            'username' => 'required',
             'email' => 'required|unique:admins',
             'password' => 'required|min:6',
 
         ];
         $data = $this->validate(request(), $rules, [], [
-            'name' => trans('admin.name'),
+            'username' => trans('admin.username'),
             'email' => trans('admin.email'),
             'password' => trans('admin.password'),
 
         ]);
         $user = new User;
-        $user->name = request('name');
+        $user->username = request('username');
         $user->email = request('email');
         $user->password = bcrypt(request('password'));
         $user->save();
         //add Role
         $user->roles()->attach(Role::where('name', 'User')->first());
-
-        // session()->flash('success',trans('admin.added'));
         auth()->guard('web')->login($user);
-        // auth()->guard('web')->attempt(['email' =>$data['email'], 'password' => $data['password']]);
         return redirect('/');
     }
 
@@ -298,47 +296,48 @@ class HomeController extends Controller
      */
     public function rating()
     {
-        if(request()->ajax()){
-            $ra = \willvincent\Rateable\Rating::where('user_id',\Auth::id())->first();
-            if($ra ==null){
+        if (request()->ajax()) {
+            $ra = \willvincent\Rateable\Rating::where('user_id', \Auth::id())->first();
+            if ($ra == null) {
                 $post = Post::find(request('id'));
                 $rating = new \willvincent\Rateable\Rating;
                 $rating->rating = request('input-1');
                 $rating->user_id = \Auth::user()->id;
-            
+
                 $post->ratings()->save($rating);
-            }else{
-                $post = Post::find(request('id'));       
+            } else {
+                $post = Post::find(request('id'));
                 $post->ratings()->delete($ra);
                 $rating = new \willvincent\Rateable\Rating;
                 $rating->rating = request('input-1');
                 $rating->user_id = \Auth::user()->id;
                 $post->ratings()->save($rating);
-    
+
             }
-    
-        }else{
-            $ra = \willvincent\Rateable\Rating::where('user_id',\Auth::id())->first();
-            if($ra ==null){
+
+        } else {
+            $ra = \willvincent\Rateable\Rating::where('user_id', \Auth::id())->first();
+            if ($ra == null) {
                 $post = Post::find(request('id'));
                 $rating = new \willvincent\Rateable\Rating;
                 $rating->rating = request('input-1');
                 $rating->user_id = \Auth::user()->id;
-            
+
                 $post->ratings()->save($rating);
-            }else{
-                $post = Post::find(request('id'));       
+            } else {
+                $post = Post::find(request('id'));
                 $post->ratings()->delete($ra);
                 $rating = new \willvincent\Rateable\Rating;
                 $rating->rating = request('input-1');
                 $rating->user_id = \Auth::user()->id;
                 $post->ratings()->save($rating);
-    
+
             }
         }
         return response()->json($rating);
 //        return back();
     }
+
     public function post_add()
     {
         return view('blog.pages.post_store', ['title' => trans('admin.add_post')]);
@@ -347,12 +346,12 @@ class HomeController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function post_store(Request $request)
     {
-        if(app('l')=='en'){
+        if (app('l') == 'en') {
             $rules = [
                 'title_' . app('l') => 'required',
                 'content_' . app('l') => 'required',
@@ -363,9 +362,9 @@ class HomeController extends Controller
                 'tag_id' => 'required|numeric',
                 'image_post' => 'sometimes|nullable|' . it()->image(),
                 'keyword' => 'sometimes|nullable',
-    
+
             ];
-        }else{
+        } else {
             $rules = [
                 'title_' . app('l') => 'required',
                 'content_' . app('l') => 'required',
@@ -376,10 +375,10 @@ class HomeController extends Controller
                 'tag_id' => 'required|numeric',
                 'image_post' => 'sometimes|nullable|' . it()->image(),
                 'keyword' => 'sometimes|nullable',
-    
+
             ];
         }
-        
+
         $data = $this->validate(request(), $rules, [], [
             'title_en' => trans('admin.title_en'),
             'content_en' => trans('admin.content_en'),
@@ -400,7 +399,7 @@ class HomeController extends Controller
         }
         Post::create($data);
 
-        session()->flash('success', trans('admin.added'));
+        toastr()->success(trans('admin.Success'), trans('admin.added'));
         return redirect('bloger');
     }
 
@@ -413,13 +412,13 @@ class HomeController extends Controller
     /**
      * Baboon Script By [It V 1.0 | https://it.phpanonymous.com]
      * update a newly created resource in storage.
-     * @param  \Illuminate\Http\Request $r
+     * @param \Illuminate\Http\Request $r
      * @return \Illuminate\Http\Response
      */
     public function post_update($id)
     {
         $post = Post::find($id);
-        if(app('l')=='en'){
+        if (app('l') == 'en') {
             $rules = [
                 'title_' . app('l') => 'required',
                 'content_' . app('l') => 'required',
@@ -430,9 +429,9 @@ class HomeController extends Controller
                 'tag_id' => 'required|numeric',
                 'image_post' => 'sometimes|nullable|' . it()->image(),
                 'keyword' => 'sometimes|nullable',
-    
+
             ];
-        }else{
+        } else {
             $rules = [
                 'title_' . app('l') => 'required',
                 'content_' . app('l') => 'required',
@@ -443,7 +442,7 @@ class HomeController extends Controller
                 'tag_id' => 'required|numeric',
                 'image_post' => 'sometimes|nullable|' . it()->image(),
                 'keyword' => 'sometimes|nullable',
-    
+
             ];
         }
         $data = $this->validate(request(), $rules, [], [
@@ -458,25 +457,25 @@ class HomeController extends Controller
             'image_post' => trans('admin.image_post'),
 
         ]);
-        $data['admin_id'] = admin()->user()->id;
+        if (isset(admin()->user()->id)) {
+
+            $data['admin_id'] = admin()->user()->id;
+        }
         if (request()->hasFile('image_post')) {
             Storage::has($post->image_post) ? Storage::delete($post->image_post) : '';
             $data['image_post'] = it()->upload('image_post', 'post');
 
         }
-        // if (request()->hasFile('image_post')) {
-        // 	$data['image_post'] = it()->upload('image_post', 'post');
-        // }
         Post::where(['id' => $id, 'user_id' => \Auth::user()->id])->update($data);
 
-        session()->flash('success', trans('admin.updated'));
-        return redirect('bloger/post/'.$id);
+        toastr()->success(trans('admin.Success'), trans('admin.updated'));
+        return redirect('bloger/post/' . $id);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -487,7 +486,7 @@ class HomeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -498,8 +497,8 @@ class HomeController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -510,7 +509,7 @@ class HomeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

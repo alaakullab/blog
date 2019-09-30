@@ -700,7 +700,8 @@
     });
 </script>
 {!! NoCaptcha::renderJs() !!}
-
+@toastr_js
+@toastr_render
 @stack('js')
 
 

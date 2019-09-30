@@ -77,7 +77,7 @@ class OrderController extends Controller
         }
 
         @$Order->delete();
-        session()->flash('success', trans('admin.deleted'));
+        toastr()->success(trans('admin.Success'), trans('admin.deleted'));
         return back();
     }
 
@@ -92,7 +92,7 @@ class OrderController extends Controller
                 }
                 @$Order->delete();
             }
-            session()->flash('success', trans('admin.deleted'));
+            toastr()->success(trans('admin.Success'), trans('admin.deleted'));
             return back();
         } else {
             $Order = Order::find($data);
@@ -101,7 +101,7 @@ class OrderController extends Controller
                 Storage::has($Order->file) ? Storage::delete($Order->file) : '';
             }
             @$Order->delete();
-            session()->flash('success', trans('admin.deleted'));
+            toastr()->success(trans('admin.Success'), trans('admin.deleted'));
             return back();
         }
     }

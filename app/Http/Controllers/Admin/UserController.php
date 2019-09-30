@@ -82,7 +82,7 @@ class UserController extends Controller
             $draftsman->user_id = $user->id;
             @$draftsman->save();
         }
-        session()->flash('success', trans('admin.added'));
+        toastr()->success(trans('admin.Success'), trans('admin.added'));
         return redirect(aurl('user'));
     }
 
@@ -192,7 +192,7 @@ class UserController extends Controller
 
 // return dd($role);
         @DB::table('user_role')->where('user_id', $id)->update(['role_id' => $role->id]);
-        session()->flash('success', trans('admin.updated'));
+        toastr()->success(trans('admin.Success'), trans('admin.updated'));
         return redirect(aurl('user'));
     }
 
@@ -207,7 +207,7 @@ class UserController extends Controller
         $user = User::find($id);
 
       $user->delete();
-        session()->flash('success', trans('admin.deleted'));
+        toastr()->success(trans('admin.Success'), trans('admin.deleted'));
         return back();
     }
 
@@ -220,13 +220,13 @@ class UserController extends Controller
 
                 @$user->delete();
             }
-            session()->flash('success', trans('admin.deleted'));
+            toastr()->success(trans('admin.Success'), trans('admin.deleted'));
             return back();
         } else {
             $user = User::find($data);
 
             @$user->delete();
-            session()->flash('success', trans('admin.deleted'));
+            toastr()->success(trans('admin.Success'), trans('admin.deleted'));
             return back();
         }
     }

@@ -82,7 +82,7 @@ class DepartmentsController extends Controller
         }
         Department::create($data);
 
-        session()->flash('success', trans('admin.added'));
+        toastr()->success(trans('admin.Success'), trans('admin.added'));
         return redirect(aurl('departments'));
     }
 
@@ -153,7 +153,7 @@ class DepartmentsController extends Controller
         }
         Department::where('id', $id)->update($data);
 
-        session()->flash('success', trans('admin.updated'));
+        toastr()->success(trans('admin.Success'), trans('admin.updated'));
         return redirect(aurl('departments'));
     }
 
@@ -191,7 +191,7 @@ class DepartmentsController extends Controller
         // $dep=Department::find($id);
         // dd($dep);
         // @$dep->delete();
-        session()->flash('success', trans('admin.deleted'));
+        toastr()->success(trans('admin.Success'), trans('admin.deleted'));
         return redirect(aurl('departments'));
     }
 
@@ -205,14 +205,14 @@ class DepartmentsController extends Controller
 
                 @$department->delete();
             }
-            session()->flash('success', trans('admin.deleted'));
+            toastr()->success(trans('admin.Success'), trans('admin.deleted'));
             return back();
         } else {
             $department = Department::find($data);
 
 
             @$department->delete();
-            session()->flash('success', trans('admin.deleted'));
+            toastr()->success(trans('admin.Success'), trans('admin.deleted'));
             return back();
         }
     }

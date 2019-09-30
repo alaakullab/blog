@@ -97,10 +97,10 @@
                                     <td>{{ trans('admin.Order_subtotal') }}</td>
                                     <th>${{Cart::subtotal()}}</th>
                                 </tr>
-                                {{--<tr>--}}
-                                    {{--<td>{{ trans('admin.Tax') }}</td>--}}
-                                    {{--<th>${{Cart::tax()}}</th>--}}
-                                {{--</tr>--}}
+                                <tr>
+                                    <td>{{ trans('admin.Tax') }}</td>
+                                    <th>${{Cart::tax()}}</th>
+                                </tr>
                                 <tr class="total">
                                     <td>{{ trans('admin.total') }}</td>
                                     <th>{{Cart::total()}}</th>

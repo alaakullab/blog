@@ -95,10 +95,10 @@
                             <figcaption>
                                 @if(app('l') == 'en')
                                     <h3>{{$HomeLogin->name_title2_en}}</h3>
-                                    <p class="homedescmenu" >{{$HomeLogin->name_desc2_en}}.</p>
+                                    <p class="homedescmenu">{{$HomeLogin->name_desc2_en}}.</p>
                                 @else
                                     <h3>{{$HomeLogin->name_title2_ar}}</h3>
-                                    <p class="homedescmenu" >{{$HomeLogin->name_desc2_ar}}.</p>
+                                    <p class="homedescmenu">{{$HomeLogin->name_desc2_ar}}.</p>
                                 @endif
                             </figcaption>
                         </figure>
@@ -108,10 +108,10 @@
                             <figcaption>
                                 @if(app('l') == 'en')
                                     <h3>{{$HomeLogin->name_title3_en}}</h3>
-                                    <p class="homedescmenu" >{{$HomeLogin->name_desc3_en}}.</p>
+                                    <p class="homedescmenu">{{$HomeLogin->name_desc3_en}}.</p>
                                 @else
                                     <h3>{{$HomeLogin->name_title3_ar}}</h3>
-                                    <p class="homedescmenu" >{{$HomeLogin->name_desc3_ar}}.</p>
+                                    <p class="homedescmenu">{{$HomeLogin->name_desc3_ar}}.</p>
                                 @endif
                             </figcaption>
                         </figure>
@@ -123,16 +123,17 @@
                         <div class="entry-form">
                             <div class="">
                                 <a class="avatar" href="#"><img
-                                        style="width: 150px; border: 5px #4fbfa8 solid ; border-radius: 50%"
-                                        src="{{ empty(Auth::user()->user_image) ? url('user_placeholder.png') : Storage::url(Auth::user()->user_image) }}"
-                                        alt="Profile Image"></a>
+                                            style="width: 150px; border: 5px #4fbfa8 solid ; border-radius: 50%"
+                                            src="{{ empty(Auth::user()->user_image) ? url('user_placeholder.png') : Storage::url(Auth::user()->user_image) }}"
+                                            alt="Profile Image"></a>
                                 <br/><br/>
                             </div>
                             <div>
                            <span>
                                 <h2>{{empty(Auth::user()->First_Name.Auth::user()->Last_Name) ? Auth::user()->username : Auth::user()->First_Name .' '.Auth::user()->Last_Name }}</h2>
-                                    <a href="{{ url('E-commerce/account') }}"><h3 style="color:#4fbfa8;">{{ trans('admin.My_account') }}</h3></a>
-                               <a style="color: white;" href="{{url('/E-commerce/logout')}}" >Log out</a>
+                                    <a href="{{ url('E-commerce/account') }}"><h3
+                                                style="color:#4fbfa8;">{{ trans('admin.My_account') }}</h3></a>
+                               <a style="color: white;" href="{{url('/E-commerce/logout')}}">Log out</a>
                                 </span>
                             </div>
                         </div>
@@ -146,7 +147,7 @@
                             <input type="email" name="email" class="form-control" placeholder="{{trans('admin.email')}}"
                                    pattern="[a-zA-Z0-9.!#$%&amp;’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+"
                                    title="default@example.com"
-                                   required="" >
+                                   required="">
 
                             <input type="password" name="password" class="form-control"
                                    placeholder="{{trans('admin.password')}}" required="">
@@ -186,35 +187,42 @@
                             <div class="team-image">
                                 @if($team->user_image)
                                     <a href="{{url('team/'.$team->username)}}">
-                                    <img src="{{Storage::url($team->user_image)}}" class="img-responsive" alt="{{$team->First_Name.' '.$team->Last_Name }}" style="height: 263px;">
+                                        <img src="{{Storage::url($team->user_image)}}" class="img-responsive"
+                                             alt="{{$team->First_Name.' '.$team->Last_Name }}" style="height: 263px;">
                                     </a>
                                 @else
                                     <a href="{{url('team/'.$team->username)}}">
-                            <img src="{{url('user_placeholder.png')}}" class="img-responsive" alt=""  style="height: 263px;">
+                                        <img src="{{url('user_placeholder.png')}}" class="img-responsive" alt=""
+                                             style="height: 263px;">
                                     </a>
                                 @endif
                             </div>
                             <div class="team-info">
                                 <a href="{{url('team/'.$team->username)}}">
-                                <h3>{{$team->First_Name.' '.$team->Last_Name }}</h3>
+                                    <h3>{{$team->First_Name.' '.$team->Last_Name }}</h3>
                                 </a>
                                 <span></span>
                             </div>
                             <ul class="social-icon">
                                 @if($team->Informations_users_team->facebook)
-                                <li><a href="{{$team->Informations_users_team->facebook}}" target="_blank" class="fa fa-facebook-square" attr="facebook icon"></a></li>
+                                    <li><a href="{{$team->Informations_users_team->facebook}}" target="_blank"
+                                           class="fa fa-facebook-square" attr="facebook icon"></a></li>
                                 @endif
-                                 @if($team->Informations_users_team->instagram)
-                                <li><a href="{{$team->Informations_users_team->instagram}}" target="_blank" class="fa fa-instagram"></a></li>
+                                @if($team->Informations_users_team->instagram)
+                                    <li><a href="{{$team->Informations_users_team->instagram}}" target="_blank"
+                                           class="fa fa-instagram"></a></li>
                                 @endif
-                                 @if($team->Informations_users_team->twitter)
-                                <li><a href="{{$team->Informations_users_team->twitter}}" target="_blank" class="fa fa-twitter"></a></li>
+                                @if($team->Informations_users_team->twitter)
+                                    <li><a href="{{$team->Informations_users_team->twitter}}" target="_blank"
+                                           class="fa fa-twitter"></a></li>
                                 @endif
-                               @if($team->Informations_users_team->pinterest)
-                                <li><a href="{{$team->Informations_users_team->pinterest}}" target="_blank" class="fa fa-pinterest"></a></li>
+                                @if($team->Informations_users_team->pinterest)
+                                    <li><a href="{{$team->Informations_users_team->pinterest}}" target="_blank"
+                                           class="fa fa-pinterest"></a></li>
                                 @endif
-                                   @if($team->Informations_users_team->linkedin)
-                                <li><a href="{{$team->Informations_users_team->linkedin}}" target="_blank" class="fa fa-linkedin"></a></li>
+                                @if($team->Informations_users_team->linkedin)
+                                    <li><a href="{{$team->Informations_users_team->linkedin}}" target="_blank"
+                                           class="fa fa-linkedin"></a></li>
                                 @endif
                             </ul>
                         </div>
@@ -241,55 +249,61 @@
 
                     <div class="owl-carousel owl-theme owl-courses">
                         @foreach(Product_last5() as $last)
-                        <div class="col-md-4 col-sm-4">
-                            <div class="item">
-                                <div class="courses-thumb">
-                                    <div class="courses-top">
-                                        <div class="courses-image">
-                                            <?php
-                                            $pr = Product_first($last->id);
-                                            ?>
-                                            @if($pr && $pr->full_path != null)
-                                            <img src="{{Storage::url($pr->full_path)}}"
-                                                 class="img-responsive" alt="">
-                                            @endif
+                            <div class="col-md-4 col-sm-4">
+                                <div class="item">
+                                    <div class="courses-thumb">
+                                        <div class="courses-top">
+                                            <div class="courses-image">
+                                                <?php
+                                                $pr = Product_first($last->id);
+                                                ?>
+                                                @if($pr && $pr->full_path != null)
+                                                    <img src="{{Storage::url($pr->full_path)}}"
+                                                         class="img-responsive" alt="">
+                                                @endif
+                                            </div>
+                                            <div class="courses-date display-none">
+                                                <span> <i class="fa fa-calendar"></i> {{ $last->created_at->format('Y-m-d') }}</span>
+                                                @if (date('Y-m-d',strtotime($last->created_at)) >= date('Y-m-d'))
+                                                <span> <i class="fa fa-clock-o"></i> {{ 24 - date('H',strtotime($last->created_at->format('h:i:sa')) - strtotime(date('h:i:sa'))) }} Hours </span>
+                                                @endif
+                                            </div>
                                         </div>
-                                        <div class="courses-date">
-                                            <span><i class="fa fa-calendar"></i> 12 / 7 / 2018</span>
-                                            <span><i class="fa fa-clock-o"></i> 7 Hours</span>
-                                        </div>
-                                    </div>
-
-                                    <div class="courses-detail">
-                                        @if(app('l')=='en')
-                                        <h3><a href="{{url('E-commerce/product/'.$last->id)}}">{{$last->product_name_en}}</a></h3>
-                                        @else
-                                       <h3><a href="{{url('E-commerce/product/'.$last->id)}}">{{$last->product_name_ar}}</a></h3>
-
-                                        @endif
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                    </div>
-
-                                    <div class="courses-info">
-                                        <div class="courses-author">
-                                            <img src="{{Storage::url($last->user->user_image)}}"
-                                                 class="img-responsive" alt="">
-                                            @if($last->user->First_Name ==null)
-
-                                            <span>{{$last->user->username}}</span>
+                                        <!--                                            --><?php //print_r($last); die(); ?>
+                                        <div class="courses-detail">
+                                            @if(app('l')=='en')
+                                                <h3>
+                                                    <a href="{{url('E-commerce/product/'.$last->id)}}">{{$last->product_name_en}}</a>
+                                                </h3>
                                             @else
-                                            <span>{{$last->user->First_Name .' '.$last->user->Last_Name }}</span>
+                                                <h3>
+                                                    <a href="{{url('E-commerce/product/'.$last->id)}}">{{$last->product_name_ar}}</a>
+                                                </h3>
 
                                             @endif
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                                         </div>
-                                        <div class="courses-price">
-                                            <a href="#"><span>$ {{$last->price}}</span></a>
+
+                                        <div class="courses-info">
+                                            <div class="courses-author">
+                                                <img src="{{Storage::url($last->user->user_image)}}"
+                                                     class="img-responsive" alt="">
+                                                @if($last->user->First_Name ==null)
+
+                                                    <span>{{$last->user->username}}</span>
+                                                @else
+                                                    <span>{{$last->user->First_Name .' '.$last->user->Last_Name }}</span>
+
+                                                @endif
+                                            </div>
+                                            <div class="courses-price">
+                                                <a href="{{url('E-commerce/product/'.$last->id)}}"><span>$ {{$last->price}}</span></a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-@endforeach
+                        @endforeach
 
                     </div>
 
@@ -312,47 +326,47 @@
 
                     <div class="owl-carousel owl-theme owl-client">
                         @foreach(Post_last4() as $last)
-                        <div class="col-md-4 col-sm-4">
-                            <div class="item">
-                                <div class="tst-image">
-                                    <img src="{{Storage::url($last->user->user_image)}}" class="img-responsive"
-                                         alt="">
-                                </div>
-                                <div class="tst-author">
-                                    @if($last->user->First_Name ==null)
+                            <div class="col-md-4 col-sm-4">
+                                <div class="item">
+                                    <div class="tst-image">
+                                        <img src="{{Storage::url($last->user->user_image)}}" class="img-responsive"
+                                             alt="">
+                                    </div>
+                                    <div class="tst-author">
+                                        @if($last->user->First_Name ==null)
 
-                                    <h4>{{$last->user->username}}</h4>
-                                            @else
+                                            <h4>{{$last->user->username}}</h4>
+                                        @else
                                             <h4>{{$last->user->First_Name .' '.$last->user->Last_Name }}</h4>
 
-                                            @endif
-{{--                                    <span>Shopify Developer</span>--}}
+                                        @endif
+                                        {{--                                    <span>Shopify Developer</span>--}}
+                                    </div>
+                                    @if(app('l') == 'en')
+                                        <p>
+
+
+                                            <a href="{{url('bloger/post/'.$last->id)}}">{!!$last->title_en!!}</a>
+                                        </p>
+
+                                    @else
+                                        <p>
+                                            <a href="{{url('bloger/post/'.$last->id)}}">{!!$last->title_ar!!}</a>
+
+                                        </p>
+                                    @endif
+                                    {{--
+                                                                    <div class="tst-rating">
+                                                                        <i class="fa fa-star"></i>
+                                                                        <i class="fa fa-star"></i>
+                                                                        <i class="fa fa-star"></i>
+                                                                        <i class="fa fa-star"></i>
+                                                                        <i class="fa fa-star"></i>
+                                                                    </div>
+                                    --}}
                                 </div>
-                                @if(app('l') == 'en')
-                                <p>
-
-
-                                <a href="{{url('bloger/post/'.$last->id)}}">{!!$last->title_en!!}</a>
-                                </p>
-
-                                @else
-                                <p>
-                                <a href="{{url('bloger/post/'.$last->id)}}">{!!$last->title_ar!!}</a>
-
-                                </p>
-                                @endif
-{{--
-                                <div class="tst-rating">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
---}}
                             </div>
-                        </div>
-@endforeach
+                        @endforeach
 
                     </div>
 
@@ -367,45 +381,47 @@
             <div class="row">
 
                 <div class="col-md-6 col-sm-12">
-                        <div class="section-title">
-                            <h2>@awt('Contact us','ar')
-                                <small>@awt('we love conversations. let us talk!','en')</small>
-                            </h2>
-                        </div>
-  {!!Form::open(['url'=>url('/Contact'),'method'=>'post','id'=>'contact-form','role'=>'form'])!!}
-                        <div class="col-md-12 col-sm-12">
+                    <div class="section-title">
+                        <h2>@awt('Contact us','ar')
+                            <small>@awt('we love conversations. let us talk!','en')</small>
+                        </h2>
+                    </div>
+                    {!!Form::open(['url'=>url('/Contact'),'method'=>'post','id'=>'contact-form','role'=>'form'])!!}
+                    <div class="col-md-12 col-sm-12">
                         <div class="form-group {{$errors->get('full_name') ? 'has-error' : '' }}">
-                            <input class="form-control" placeholder="{{trans('admin.enter_full_name')}}" name="full_name" id="full_name" type="text">
-                                       @if($errors->get('full_name') )
-                            <span class="help-block">
+                            <input class="form-control" placeholder="{{trans('admin.enter_full_name')}}"
+                                   name="full_name" id="full_name" type="text">
+                            @if($errors->get('full_name') )
+                                <span class="help-block">
 {{ $errors->first('full_name') }} </span>
-                        @endif
+                            @endif
                         </div>
 
                         <div class="form-group {{$errors->get('email_contacts') ? 'has-error' : '' }}">
-                            <input class="form-control" placeholder="{{trans('admin.enter_email')}}" id="email" name="email_contacts" type="email">
-                                  @if($errors->get('email_contacts') )
-                            <span class="help-block">
+                            <input class="form-control" placeholder="{{trans('admin.enter_email')}}" id="email"
+                                   name="email_contacts" type="email">
+                            @if($errors->get('email_contacts') )
+                                <span class="help-block">
 {{ $errors->first('email_contacts') }} </span>
-                        @endif
+                            @endif
                         </div>
 
                         <div class="form-group {{$errors->get('message') ? 'has-error' : '' }}">
-                            <textarea id="message" rows="6" class="form-control" placeholder="{{trans('admin.enter_message')}}" name="message"></textarea>
-                                     @if($errors->get('message') )
-                            <span class="help-block">
+                            <textarea id="message" rows="6" class="form-control"
+                                      placeholder="{{trans('admin.enter_message')}}" name="message"></textarea>
+                            @if($errors->get('message') )
+                                <span class="help-block">
 {{ $errors->first('message') }} </span>
-                        @endif
+                            @endif
                         </div>
                     </div>
- <div class="col-md-4 col-sm-12">
- <input type="submit" class="form-control" name="send message" value="{{awtTrans('send message','en')}}">
-                        </div>
+                    <div class="col-md-4 col-sm-12">
+                        <input type="submit" class="form-control" name="send message"
+                               value="{{awtTrans('send message','en')}}">
+                    </div>
 
-                <!-- /.row -->
-{!!Form::close()!!}
-
-
+                    <!-- /.row -->
+                    {!!Form::close()!!}
 
 
                 </div>

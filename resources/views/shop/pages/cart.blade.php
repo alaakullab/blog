@@ -22,7 +22,7 @@
                                         <th colspan="2">{{ trans('admin.product_name') }}</th>
                                         <th>{{ trans('admin.Quantity') }}</th>
                                         <th>{{ trans('admin.Unit_price') }}</th>
-                                        <th colspan="2">{{ trans('admin.total') }}</th>
+                                        <th>{{ trans('admin.Tax') }}</th>
                                         <th colspan="2">{{ trans('admin.action') }}</th>
                                     </tr>
                                     </thead>
@@ -42,13 +42,12 @@
                                                 <input type="number" min="1" value="{{$cartItem->qty}}" name="qty" class="form-control">
                                             </td>
                                             <td>${{$cartItem->price}}</td>
-                                            <td>${{Cart::total()}}</td>
+                                            <td>${{Cart::tax()}}</td>
 
                                             <td colspan="2"><button class="btn btn-default" ><i class="fa fa-refresh"></i></button>
+                                                <a href="{{route('cart.delete',$cartItem->rowId)}}" class="btn btn-default"><i class="fa fa-trash-o"></i></a>
                                             </td>
                                             {!!Form::close()!!}
-                                            <td colspan="2"><a href="{{route('cart.delete',$cartItem->rowId)}}" class="btn btn-default"><i class="fa fa-trash-o"></i></a>
-                                            </td>
                                         </tr>
                                     @endforeach
                                     </tbody>

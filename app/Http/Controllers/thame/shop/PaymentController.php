@@ -1,5 +1,5 @@
 <?php
-
+// طرق الدفع (بايبال + strip)
 namespace App\Http\Controllers\thame\shop;
 
 use App\Http\Controllers\Controller;
@@ -51,7 +51,7 @@ class PaymentController extends Controller
     public function payWithpaypal()
     {
         $cartItems = Cart::Content();
-        $tax = Cart::tax();
+        // $tax = Cart::tax();
         $totoal = Cart::total();
 
         foreach ($cartItems as $cartItem) {

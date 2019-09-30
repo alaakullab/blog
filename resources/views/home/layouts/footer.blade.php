@@ -46,7 +46,7 @@
                         <h2>{{trans('admin.Quick_Links')}}</h2>
                         <ul>
                             <li><a href="{{url('bloger')}}">{{trans('admin.blog')}}</a></li>
-                            <li><a href="{{url('E-commerce')}}">{{trans('admin.story')}}</a></li>
+                            <li><a href="{{url('E-commerce')}}">{{trans('admin.store')}}</a></li>
                             <li><a href="{{url('Hire')}}">{{trans('admin.hire')}}</a></li>
                             <li><a href="{{url('Partner')}}">{{trans('admin.partner')}}</a></li>
                         </ul>
@@ -87,6 +87,7 @@
 <script src="{{url('blog/-ltr/')}}/js/owl.carousel.min.js"></script>
 <script src="{{url('blog/-ltr/')}}/js/smoothscroll.js"></script>
 <script src="{{url('blog/-ltr/')}}/js/custom.js"></script>
+
 <script type="text/javascript">
     $(document).ready(function () {
         $('#formabout-modal').on('submit', function (e) {
@@ -150,8 +151,8 @@
                         $(".portfolioimg" + dataidsecand ).css({ "left" : "0px","top" : "0px"});
 
                     }
-                    // setTimeout(function(){$('#success')[0].reset();}, 3000);
-                },
+                    setTimeout(() =>{$('#portfoliosuccess').html('');}, 3000);
+                    },
                 error: function () {
                     alert("Error reaching the server. Check your connection");
                 }
@@ -191,12 +192,13 @@
                         '               <td> <a href="javascript:;" id="' + data.last_id + '" class="btn btn-default btn-sm delete-data" ><i class="fa fa-trash-o"></i></a>\n</td>' +
                         '                                    </tr>';
                     if (data){
-                        $('#portfoliosuccess').html(success);
+                        // $('#portfoliosuccess').html(success);
                         $('.dataskillslist').append(dataskills);
                         $('.dataskillsmodaltable').after(dataskillsmodal);
                         $('.myskills-modal')[0].reset();
                     }
-                    // setTimeout(function(){$('#success')[0].reset();}, 3000);
+                    $('#myskillssuccess').html(success);
+                    setTimeout(() =>{$('#myskillssuccess').html('');}, 3000);
                 },
                 error: function () {
                     alert("Error reaching the server. Check your connection");
@@ -214,6 +216,7 @@
                     data:{id:id},
                     success:function(data)
                     {
+                        console.log(data);
                         var success = '<div class="alert alert-success"><button class="close" data-close="alert"></button> <p>' + data.success + '</p></div>';
 
                         if (data){
@@ -221,7 +224,7 @@
                             // var dataidsecand =  dataid + Number("1");
                             $(".delete" + dataid + "id").remove();
                             $('#myskillssuccess').html(success);
-
+                            setTimeout(() =>{$('#myskillssuccess').html('');}, 3000);
                         }
                     }
                 })
@@ -234,6 +237,7 @@
     });
 
 </script>
+
 {!! NoCaptcha::renderJs() !!}
 @stack('js')
 </body>

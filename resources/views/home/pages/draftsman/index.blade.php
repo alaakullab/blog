@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="{{url('draftsman/')}}/assets/css/reset.css">
     <link rel="stylesheet" type="text/css" href="{{url('draftsman/')}}/assets/css/style.css">
     <link rel="stylesheet" type="text/css" href="{{url('draftsman/')}}/assets/css/responsive.css">
+    @toastr_css
 @endpush
 @section('content')
     <div class="bodystyel">
@@ -347,7 +348,8 @@
 
     </div>
     @push('js')
-
+        @toastr_js
+        @toastr_render
         <!-- jquery and bootstrap.js -->
         {{--<script src="{{url('draftsman/')}}/assets/js/jquery-3.1.1.min.js"></script>--}}
         <script src="{{url('draftsman/')}}/assets/js/materialize.min.js"></script>

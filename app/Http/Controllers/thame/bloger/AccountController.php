@@ -4,24 +4,30 @@ namespace App\Http\Controllers\thame\bloger;
 
 // use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Post;
 use App\User;
 use App\Informations_users;
 use App\Experience;
+use Illuminate\Http\Request;
 
 class AccountController extends Controller
 {
 
     public function index()
     {
-      
-       
+
+
         return view('blog.pages.my-account.account', ['title' => trans('admin.account')]);
     }
-    public function social_media(){
-        $user = Informations_users::where('user_id',\Auth::user()->id)->first();
-        return view('blog.pages.my-account.social-media', ['title' => awTtrans('social media','en'),'user'=>$user]);
+
+    public function social_media()
+    {
+        $user = Informations_users::where('user_id', \Auth::user()->id)->first();
+        return view('blog.pages.my-account.social-media', ['title' => awTtrans('social media', 'en'), 'user' => $user]);
     }
-    public function social_media_post(){
+
+    public function social_media_post()
+    {
         $rules = [
 
             'linkedin' => ' ',
@@ -29,7 +35,7 @@ class AccountController extends Controller
             'facebook' => ' ',
             'twitter' => ' ',
             'pinterest' => ' ',
-  
+
         ];
         $data = $this->validate(request(), $rules, [], [
             'linkedin' => trans('admin.linkedin'),
@@ -37,13 +43,14 @@ class AccountController extends Controller
             'facebook' => trans('admin.facebook'),
             'twitter' => trans('admin.twitter'),
             'pinterest' => trans('admin.pinterest'),
-  
-  
+
+
         ]);
-        Informations_users::where('user_id',\Auth::user()->id)->update($data);
-        session()->flash('success', trans('admin.updated'));
+        Informations_users::where('user_id', \Auth::user()->id)->update($data);
+        toastr()->success(trans('admin.Success'), trans('admin.updated'));
         return back();
     }
+
     public function Change_password()
     {
         $hash = \Hash::check(request('Oldpassword'), \Auth::user()->password);
@@ -66,7 +73,7 @@ class AccountController extends Controller
 
             ]);
             $user->update(['password' => bcrypt(request('password'))]);
-            session()->flash('success', trans('admin.updated'));
+            toastr()->success(trans('admin.Success'), trans('admin.updated'));
 
             return redirect('E-commerce/account')
                 ->with('notificationText', trans('admin.User_Password_Changed_Successfully!'));
@@ -109,69 +116,87 @@ class AccountController extends Controller
         // \Hash::check(request('Oldpassword'), Auth::user()->password),
 
     }
-    public function exp(){
-      $exp =Experience::where('user_id',\Auth::user()->id)->get();
-      return view('blog.pages.my-account.experiences', ['exp'=>$exp,'title' => trans('admin.exp')]);
+
+    public function exp()
+    {
+        $exp = Experience::where('user_id', \Auth::user()->id)->get();
+        return view('blog.pages.my-account.experiences', ['exp' => $exp, 'title' => trans('admin.exp')]);
 
     }
+
     public function exp_id($id)
     {
-      @Experience::where('id',$id)->delete();
-      session()->flash('success', trans('admin.deleted'));
-      return back();
+        @Experience::where('id', $id)->delete();
+        toastr()->success(trans('admin.Success'), trans('admin.deleted'));
+        return back();
 
     }
-    public function exp_post(){
-      $rules = [
 
-          'exp' => 'required',
+    public function exp_post()
+    {
+        $rules = [
 
-      ];
-      $data = $this->validate(request(), $rules, [], [
-          'exp' => trans('admin.exp'),
+            'exp' => 'required',
+
+        ];
+        $data = $this->validate(request(), $rules, [], [
+            'exp' => trans('admin.exp'),
 
 
-      ]);
-      $data['user_id'] = \Auth::user()->id;
-      Experience::create($data);
-      session()->flash('success', trans('admin.added'));
+        ]);
+        $data['user_id'] = \Auth::user()->id;
+        Experience::create($data);
+        toastr()->success(trans('admin.Success'), trans('admin.added'));
 
-      return back();
+        return back();
 
     }
 
     public function Account_information()
     {
-        return view('blog.pages.my-account.account-information', ['title' => trans('admin.Account_information')]);
+        $user = User::find(\Auth::user()->id);
+        $Informations_users_de = Informations_users::where('user_id', \Auth::user()->id)->first();
+        return view('blog.pages.my-account.account-information', ['title' => trans('admin.Account_information'), 'user' => $user, 'Informations_users_de' => $Informations_users_de]);
     }
 
     public function Account_information_post()
     {
         $rules = [
-
             'First_name' => 'required',
             'Last_name' => 'required',
-            'Gender' => 'required',
-            'Phone' => 'required',
-
         ];
+
         $data = $this->validate(request(), $rules, [], [
             'Last_name' => trans('admin.Lastname'),
-            'First_name' => trans('admin.Firstname'),
-            'Gender' => trans('admin.Gender'),
-            'Phone' => trans('admin.Phone'),
-
+            'First_name' => trans('admin.Firstname')
         ]);
+
+        $rules_Informations_users = [
+            'Gender' => '',
+            'Phone' => '',
+        ];
+
+        $data_Informations_users = $this->validate(request(), $rules_Informations_users, [], [
+            'Gender' => trans('admin.Gender'),
+            'Phone' => trans('admin.Phone')
+        ]);
+
         $user = User::where('id', \Auth::user()->id);
-        $user->First_name =request('First_name');
-        $user->Last_name =request('Last_name');
-        if( Informations_users::where('user_id', \Auth::user()->id)){
-          $de = Informations_users::where('user_id', \Auth::user()->id);
-          $de->Gender = request('Gender');
-          $de->Phone = request('Phone');
-          $de->save();
+        $user->First_name = request('First_name');
+        $user->Last_name = request('Last_name');
+        User::where('id', \Auth::user()->id)->update($data);
+
+        $Informations_users_de = Informations_users::where('user_id', \Auth::user()->id)->first();
+        if (isset($Informations_users_de)) {
+            Informations_users::where('user_id', \Auth::user()->id)->update($data_Informations_users);
+        }else{
+            $de = new Informations_users;
+            $de->Gender = request('Gender');
+            $de->Phone = request('Phone');
+            $de->user_id = \Auth::user()->id;
+            $de->save();
         }
-        session()->flash('success', trans('admin.added'));
+        toastr()->success(trans('admin.Success'), trans('admin.updated'));
 
         return back();
     }
@@ -199,7 +224,7 @@ class AccountController extends Controller
         }
         // return dd($data['user_image']);
         User::where('id', \Auth::user()->id)->update($data);
-        session()->flash('success', trans('admin.added'));
+        toastr()->success(trans('admin.Success'), trans('admin.updated'));
 
         return back();
     }

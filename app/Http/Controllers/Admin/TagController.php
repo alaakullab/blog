@@ -64,7 +64,7 @@ class TagController extends Controller
         $data['admin_id'] = admin()->user()->id;
         Tag::create($data);
 
-        session()->flash('success', trans('admin.added'));
+        toastr()->success(trans('admin.Success'), trans('admin.added'));
         return redirect(aurl('tag'));
     }
 
@@ -113,7 +113,7 @@ class TagController extends Controller
         $data['admin_id'] = admin()->user()->id;
         Tag::where('id', $id)->update($data);
 
-        session()->flash('success', trans('admin.updated'));
+        toastr()->success(trans('admin.Success'), trans('admin.updated'));
         return redirect(aurl('tag'));
     }
 
@@ -137,7 +137,7 @@ class TagController extends Controller
         if (request()->has('delete')) {
 
             Tag::where('id', $id)->delete();
-            session()->flash('success', trans('admin.deleted'));
+            toastr()->success(trans('admin.Success'), trans('admin.deleted'));
             return back();
 
         } else {
@@ -145,7 +145,7 @@ class TagController extends Controller
               Storage::has($Tag->image_tag) ? Storage::delete($Tag->image_tag) : '';
           }
             @$Tag->forceDelete();
-            session()->flash('success', trans('admin.deleted'));
+            toastr()->success(trans('admin.Success'), trans('admin.deleted'));
             return back();
         }
 
@@ -160,7 +160,7 @@ class TagController extends Controller
                     Tag::where('id', $id)->restore();
 
                 }
-                session()->flash('success', trans('admin.recovered'));
+                toastr()->success(trans('admin.Success'), trans('admin.recovered'));
                 return back();
             }
         }
@@ -173,7 +173,7 @@ class TagController extends Controller
                     }
                     Tag::where('id', $id)->forceDelete();
                 }
-                session()->flash('success', trans('admin.deleted'));
+                toastr()->success(trans('admin.Success'), trans('admin.deleted'));
                 return back();
 
             }
@@ -182,13 +182,13 @@ class TagController extends Controller
 
                 @$tag->delete();
             }
-            session()->flash('success', trans('admin.deleted'));
+            toastr()->success(trans('admin.Success'), trans('admin.deleted'));
             return back();
         } else {
             $tag = Tag::find($data);
 
             @$tag->delete();
-            session()->flash('success', trans('admin.deleted'));
+            toastr()->success(trans('admin.Success'), trans('admin.deleted'));
             return back();
         }
     }

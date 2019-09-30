@@ -24,32 +24,32 @@
             </div>
 
             <div class="panel-body">
-
                 <ul class="nav nav-pills nav-stacked">
                     <li class="">
                         <a href="{{ url('bloger/account') }}"><i
-                                class="fa fa-users"></i> {{ trans('admin.My_account') }}</a>
+                                    class="fa fa-users"></i> {{ trans('admin.My_account') }}</a>
                     </li>
                     <li class="active">
-                        <a href="{{ url('bloger/account/Account_information') }}"><i class="fa fa-cog"></i>{{trans('admin.Account_information') }}</a>
+                        <a href="{{ url('bloger/account/Account_information') }}"><i
+                                    class="fa fa-cog"></i>{{trans('admin.Account_information') }}</a>
                     </li>
                     <li class="">
                         <a href="{{ url('bloger/account/Change_profile') }}"><i
-                                class="fa fa-user"></i> {{ trans('admin.Change_profile') }}</a>
+                                    class="fa fa-user"></i> {{ trans('admin.Change_profile') }}</a>
                     </li>
                     @if(\Auth::user()->teams == 'yes' )
-                    <li class="">
-                        <a href="{{ url('bloger/account/exp') }}"><i
-                                class="fa fa-user"></i> @awt('add experiences','en')</a>
-                    </li>
-                
-                  @endif
-                  @if(\Auth::user()->Informations_users_de or \Auth::user()->Informations_users_team)
-                  <li class="">
-                          <a href="{{ url('bloger/account/social-media') }}"><i
-                                  class="	fa fa-pinterest-square"></i> @awt('Social Media','ar')</a>
-                      </li>
-                      @endif
+                        <li class="">
+                            <a href="{{ url('bloger/account/exp') }}"><i
+                                        class="fa fa-user"></i> @awt('add experiences','en')</a>
+                        </li>
+
+                    @endif
+                    @if(\Auth::user()->Informations_users_de or \Auth::user()->Informations_users_team)
+                        <li class="">
+                            <a href="{{ url('bloger/account/social-media') }}"><i
+                                        class="	fa fa-pinterest-square"></i> @awt('Social Media','ar')</a>
+                        </li>
+                    @endif
                     <li>
                         <a href="{{ url('bloger/logout') }}"><i class="fa fa-sign-out"></i> {{ trans('admin.logout') }}
                         </a>
@@ -86,7 +86,7 @@
                     <div class="col-sm-6">
                         <div class="form-group {{$errors->get('Last_name') ? 'has-error' : '' }}">
                             <label for="lastname">{{ trans('admin.Lastname') }}</label>
-                            <input class="form-control" value="{{\Auth::user()->Last_Name}}" name="Last_name"
+                            <input class="form-control" value="{{$user->Last_Name}}" name="Last_name"
                                    id="lastname" type="text">
                             @if($errors->get('Last_name') )
                                 <span class="help-block">
@@ -97,7 +97,7 @@
                     <div class="col-sm-6">
                         <div class="form-group  {{$errors->get('First_name') ? 'has-error' : '' }}">
                             <label for="firstname">{{ trans('admin.Firstname') }}</label>
-                            <input class="form-control" value="{{\Auth::user()->First_Name}}"
+                            <input class="form-control" value="{{$user->First_Name}}"
                                    name="First_name" id="firstname" type="text">
                             @if($errors->get('First_name') )
                                 <span class="help-block">
@@ -110,7 +110,7 @@
                     <div class="col-sm-6">
                         <div class="form-group {{$errors->get('First_name') ? 'has-error' : '' }}">
                             <label for="firstname">{{ trans('admin.Firstname') }}</label>
-                            <input class="form-control" value="{{\Auth::user()->First_Name}}"
+                            <input class="form-control" value="{{ $user->First_Name }}"
                                    name="First_name" id="firstname" type="text">
                             @if($errors->get('First_name') )
                                 <span class="help-block">
@@ -121,7 +121,7 @@
                     <div class="col-sm-6">
                         <div class="form-group {{$errors->get('Last_name') ? 'has-error' : '' }}">
                             <label for="lastname">{{ trans('admin.Lastname') }}</label>
-                            <input class="form-control" value="{{\Auth::user()->Last_Name}}" name="Last_name"
+                            <input class="form-control" value="{{ $user->Last_Name}}" name="Last_name"
                                    id="lastname" type="text">
                             @if($errors->get('Last_name') )
                                 <span class="help-block">
@@ -132,52 +132,56 @@
                 @endif
             </div>
             <!-- /.row -->
-@if(Auth::check())
-@if(Auth::user()->Informations_users_de)
-            <div class="row">
-                <div class="col-sm-6" @if(app('l') == 'ar') style="float: right;" @endif>
-                    <div class="form-group">
-                        <label for="company">{{ trans('admin.Gender') }}</label>
-                        <select class="form-control" id="state" name="Gender">
-                            <option
-                                value="Male" {{Auth::user()->Informations_users_de->Gender  =='Male' ? 'selected' :''}}>{{ trans('admin.Male') }}</option>
-                            <option
-                                value="female" {{Auth::user()->Informations_users_de->Gender =='female' ? 'selected' :''}}>{{ trans('admin.female') }}</option>
-                        </select>
+            @if(Auth::check())
+                    <div class="row ">
+                        <div class="col-sm-6" @if(app('l') == 'ar') style="float: right;" @endif>
+                            <div class="form-group">
+                                <label for="company">{{ trans('admin.Gender') }}</label>
+                                <select class="form-control" id="state" name="Gender">
+                                    <option
+                                            value="Male" @if (isset($Informations_users_de))
+                                        {{$Informations_users_de->Gender  =='Male' ? 'selected' :''}}
+                                            @endif >{{ trans('admin.Male') }}</option>
+                                    <option
+                                            value="female"  @if (isset($Informations_users_de))
+                                        {{$Informations_users_de->Gender =='female' ? 'selected' :''}}
+                                            @endif >{{ trans('admin.female') }}</option>
+                                </select>
 
-                    </div>
-                </div>
-                <div class="col-sm-6" @if(app('l') == 'ar') style="float: right;" @endif>
-                    <div class="form-group {{$errors->get('Phone') ? 'has-error' : '' }}">
-                        <label for="company">{{ trans('admin.Phone') }}</label>
-                        <input class="form-control" name="Phone" value="{{Auth::user()->Informations_users_de->Phone}}"
-                               type="text">
-                        @if($errors->get('Phone') )
-                            <span class="help-block">
+                            </div>
+                        </div>
+                        <div class="col-sm-6" @if(app('l') == 'ar') style="float: right;" @endif>
+                            <div class="form-group {{$errors->get('Phone') ? 'has-error' : '' }}">
+                                <label for="company">{{ trans('admin.Phone') }}</label>
+                                <input class="form-control" name="Phone" value="@if (isset($Informations_users_de)) {{$Informations_users_de->Phone}}@endif"
+
+                                       type="text">
+                                @if($errors->get('Phone') )
+                                    <span class="help-block">
 {{ $errors->first('Phone') }} </span>
-                        @endif
+{{--                                @endif--}}
+                                @endif
+
+                            </div>
+                        </div>
 
                     </div>
-                </div>
-
-            </div>
-          @endif
-          @endif
+            @endif
             <!-- /.row -->
 
-            <div class="row">
+                <div class="row">
 
-                <div class="col-sm-12 text-center">
-                    <button type="submit" class="btn btn-primary"><i
-                            class="fa fa-save"></i>{{ trans('admin.Save_changes')}} </button>
+                    <div class="col-sm-12 text-center">
+                        <button type="submit" class="btn btn-primary"><i
+                                    class="fa fa-save"></i>{{ trans('admin.Save_changes')}} </button>
 
+                    </div>
                 </div>
-            </div>
-        {!! Form::close() !!}
-        <!-- /.row -->
+            {!! Form::close() !!}
+            <!-- /.row -->
 
 
-            <hr>
+                <hr>
 
 
         </div>
