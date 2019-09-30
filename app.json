@@ -1,0 +1,20 @@
+{
+  "addons": [
+
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/php"
+    }
+  ],
+  "description": "",
+  "env": {
+    "": "apaN3t6a27UEbd0VC0LBTNzPvsQNc38+XAd4DEDkvBA="
+  },
+  "formation": {
+  },
+  "name": "blog",
+  "scripts": {
+  },
+  "stack": "heroku-18"
+}
