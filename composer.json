@@ -21,6 +21,7 @@
         "mkhdev/awt": "^1.0",
         "paypal/rest-api-sdk-php": "*",
         "phpanonymous/it": "^1.0",
+        "symfony/dotenv": "^4.3",
         "weboap/visitor": "^2.0",
         "willvincent/laravel-rateable": "^1.07",
         "yajra/laravel-datatables": "*",
