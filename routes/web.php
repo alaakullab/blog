@@ -12,7 +12,7 @@
  */
 
 Route::group(['prefix' => '/', 'middleware' => 'Lang'], function () {
-  Visitor::log();
+  //Visitor::log();
     Route::group(['middleware' => 'Maintenance'], function () {
         Route::group(['middleware' => 'guest'], function () {
 
